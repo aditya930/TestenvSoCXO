@@ -1,0 +1,276 @@
+<apex:page controller="AuthControllerforproductrefined" action="{!Categories}" showHeader="false" sidebar="false"> 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"/>
+         <apex:stylesheet value="{!$Resource.socxostyle}" />
+         <apex:stylesheet value="{!$Resource.socxostyle2}"/> 
+
+            <link href="https://freetest.socxo.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+            
+            <link href="https://freetest.socxo.com/Content/PixelAdmin?v=UxhG1c64XlEBAPHlwFMSzQt8VDi_cuCLqi8MwFaO10s1" rel="stylesheet"/>
+           
+            <link href="https://freetest.socxo.com/Content/sitesupport?v=pHZ20hGOJlXbn8RioQsz_MVG3vfSFr6uKgsDNVWaUMo1" rel="stylesheet"/>
+            
+
+            
+
+        <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}
+        .catbtn {
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  background: #3498db;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.catbtn :hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+.buttondiv{margin-bottom: 23px;
+  margin-top: 13px;}
+        </style>
+        <body class="theme-default  main-navbar-fixed mmc-dropdown-open-ul main-menu-fixed dont-animate-mm-content-sm animate-mm-md animate-mm-lg">
+            <div id="main-wrapper">
+
+                <!-- Page loading  -->
+                <div id="pageLoader" style="display: none;">
+                    <i class="prealoder"></i>
+                </div>
+
+               
+          
+                <div id="tilescontent-wrapper">
+                    <!-- Common Info/Alert message -->
+                    <div id="alertBox" class="alert alert-error posab ShowAlert " style="display: none;"><button type="button" class="close" data-dismiss="alert">×</button></div>
+                    <div id="infoBox" class="alert alert-info posab ShowInfo" style="display: none;"><button type="button" class="close" data-dismiss="alert">×</button></div>
+                 <span>Categories</span>
+                 <apex:form >
+                <apex:repeat value="{!categorymap}" var="key1"> <!-- Loop through list of account Ids -->
+                    <div class="buttondiv">
+                    <apex:outputPanel styleClass="sectionbox" layout="block">
+                    <!--<apex:commandLink onclick="bringontheblurbs({!KEY1});">{!categorymap[key1]}</apex:commandLink>-->
+                    <apex:commandLink action="{!test1}" rerender="container" status="status" styleClass="catbtn ">{!categorymap[key1]}
+                    <apex:param name="p1" assignTo="{!x1}" value="{!key1}"/>
+                    </apex:commandLink>
+                    </apex:outputPanel>
+                    </div>
+                </apex:repeat>
+                </apex:form>    
+
+
+     <!--<div id="main-menu" role="navigation">
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div id="main-menu-inner" style="overflow: hidden; width: auto; height: 100%;">
+            <ul class="navigation" id="categoryNav">
+
+               
+
+            </ul>
+        </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 564px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+    </div> -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="ScXo-aggrigate-page">
+                <div class="ScXo-Curate-container clearfix">
+                    <div class="row">
+                        <ul id="tiles" class="ScXo-Curate-feed-content">
+
+                    <apex:outputPanel id="container">
+                        <apex:actionstatus id="status" startText="Loading Blurbs...">
+                            <apex:facet name="stop">
+                                
+
+                                    <apex:outputPanel >
+                                        <apex:repeat value="{!categorylist}" var="pos1">
+                                    
+            <li class="clearfix newline">
+                <div class="Grid-Content">
+                    <div class="Scxo-Channel-Header">
+                            <i class="fa internal-feed"></i>
+                        
+                            <h6 class="blurb-src" title="The Hindu - International">&nbsp;"{!pos1.Title__c}"</h6>
+
+                    </div>
+                    <div class="imageSocialHolder">
+                        <div class="imageHolder">
+                            <div class="Scxo-Link-Hover">
+                                <a href="{!pos1.links__c}" target="_blank" class="blurb-ext-link">
+                                    <i class="fa fa-2x fa-link"></i>
+                                    <div class="clearfix">click to read more</div>
+                                </a>
+                            </div>
+                                <img src="{!pos1.ImageUrl__c}" alt=""/>
+                        </div>
+                        <div class="social-holder">
+                                <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4270linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="88" blurbid="4270" provider="linkedin"><li>
+                                        <apex:form >
+                                        <apex:commandLink action="{!postinLinkedin}" status="status1" rerender="linkedinPopup1,linkedinPopup">POST NOW
+                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId__c}"/>
+                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId__c}"/>
+                                        </apex:commandLink>
+                                        </apex:form>
+                                    </li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+
+                                <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4270facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="88" blurbid="4270" provider="facebook"><li>
+                                    <apex:form >
+                                        <apex:commandLink action="{!postinfb}" status="status1" rerender="popup1,popup" >Post In FB
+                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId__c}"/>
+                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId__c}"/>
+                                        </apex:commandLink>
+                                    </apex:form>
+                                    </li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+
+                                <div class="btn-group">
+                                    <a class="btn btn-info dropdown-toggle" id="4269twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                        <i class="fa fa-twitter"></i>
+                                        <span class="label" style="display: none;">
+
+                                            
+
+
+                                        </span>
+                                            <span class="caret"></span>
+                                    </a>
+                                        <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="89" blurbid="4269" provider="twitter"><li>
+                                        <apex:form >
+                                            <apex:commandLink action="{!postintwitter}" status="status1" rerender="twitterpopup1,twitterpopup" >Post In Twitter
+                                            <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId__c}"/>
+                                            <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId__c}"/>
+                                            </apex:commandLink>
+                                        </apex:form>
+                                        </li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                                </div>
+                        </div>
+                    </div>
+                    <div class="blurbContentTour clearfix">
+
+
+
+                            <div class="col-xs-12 ContentEditor">
+                                <div class="row">
+                                    <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 4269 ,89); " originaltext="Suspected racist attack: Sikh man assaulted in Birmingham" id="title_4269">Suspected racist attack: Sikh man assaulted in Birmingham </textarea>
+                                    <span class="label label-success ticket-label remain-chara"></span>
+                                </div>
+                                <i class="fa fa-pencil-square"></i>
+                            </div>
+                            <div class="col-xs-12 clearfix ContentEditor">
+                                <div class="row">
+                                    <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 4269 ,89); " originaltext="
+    Police have launched an investigation after video of the assault emerged on the net
+
+    ">Police have launched an investigation after video of the assault emerged on the net
+
+    </textarea>
+                                    <span class="label label-success ticket-label remain-chara"></span>
+                                </div>
+                                <i class="fa fa-pencil-square"></i>
+                            </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_4269" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                            <span class="label label-success ticket-label remain-chara-user"></span>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <apex:form >
+                            <apex:commandLink action="{!postinChatter}" rerender="chatterpost"> Post in Chatter
+                            <apex:param name="bLink" assignTo="{!blurbLink}" value="{!pos1.links__c}"/>
+                            <apex:param name="bTitle" assignTo="{!blurbTitle}" value="{!pos1.Title__c}"/>
+                            <apex:param name="bDescription" assignTo="{!blurbDesc}" value="{!pos1.Description__c}"/>
+                            <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId__c}"/>
+                            <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId__c}"/>
+                            </apex:commandLink> 
+                        </apex:form>
+                    </div>
+
+                    <br/>
+                    <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+                </div>
+            </li>
+            </apex:repeat>
+            </apex:outputPanel>
+            </apex:facet>
+            </apex:actionstatus>
+            </apex:outputPanel>
+            
+
+            
+            
+    </ul>
+                    </div>
+                </div>
+                <div id="dynamicloader" class="text-center" style="display: none;">
+                    <img src="./Private_files/loader.GIF"/>
+                    <span class="clearfix">Getting the latest blurbs</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="showDigestModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelCategory" aria-hidden="true">
+        <div class="modal-dialog DigestMailModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" style="color: #f8f8f8">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <ul id="digestTile" class="ScXo-Curate-feed-content clearfix"></ul>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+                </div><!-- / #content-wrapper -->
+                <!-- <div id="main-menu-bg"></div>-->
+            </div><!-- / #main-wrapper -->
+        
+            </body>
+     </apex:page>

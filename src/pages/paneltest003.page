@@ -1,0 +1,943 @@
+<apex:page controller="AuthControllerforproductrefined" action="{!Categories}" showHeader="false" sidebar="false" docType="html-5.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" />
+    <!-- <apex:stylesheet value="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/ui-lightness/jquery-ui.css"/>
+    <apex:stylesheet value="{$Resource.socxostyle}"/> -->
+    <apex:stylesheet value="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    
+    <apex:stylesheet value="{!URLFOR($Resource.blurbstyle, 'animate.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.blurbstyle, 'bootstrap.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.blurbstyle, 'font-awesome.min.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.blurbstyle, 'simple-line-icons.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.blurbstyle, 'app.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.blurbstyle, 'blurb.css')}" />
+
+<style>
+.light{
+   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 200px;
+    margin-left: -150px;
+    margin-top: -100px;                 
+    padding: 10px;
+    border: 2px solid #FFF;
+    background: #CCC;
+    z-index:1002;
+    overflow:visible;
+}
+.sxo_blurb_title
+{
+    display:block;
+}
+.btn
+{
+    background:#23b7e5 !important;
+    background-image:none !important;
+    border:none 0px !important;
+}
+.sxo_btn_nostyle
+{
+    color: #000 !important;
+    padding:0;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    border-bottom-color: transparent !important;
+    -webkit-box-shadow: 0 0px 0px rgba(90, 90, 90, 0.1);
+          box-shadow: 0 0px 0px rgba(90, 90, 90, 0.1);
+}
+.sxo_icon_chatter
+{
+    background:url(https://us.intacct.com/sites/default/files/press-images/chatter-icon-logo.png) no-repeat -1px -1px;
+    background-size:38px 38px;
+    width:40px;
+    height:40px;
+    display:block;
+}
+.sxo_chatter
+{
+    background:none !important;
+}
+.custombutton{
+    height: 61px;
+  text-align: center;
+  padding-top: 22px;
+}
+.btn1 {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #fff, #fff);
+  background-image: -moz-linear-gradient(top, #fff, #fff);
+  background-image: -ms-linear-gradient(top, #fff, #fff);
+  background-image: -o-linear-gradient(top, #fff, #fff);
+  background-image: linear-gradient(to bottom, #fff, #fff);
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  font-family: Georgia;
+  color: #0000;
+  font-size: 20px;
+  padding: 40px 39px 40px 40px;
+  text-decoration: none;
+}
+
+.btn1:hover {
+  background: #000;
+  background-image: -webkit-linear-gradient(top, #0000, #0000);
+  background-image: -moz-linear-gradient(top, #0000, #0000);
+  background-image: -ms-linear-gradient(top, #0000, #0000);
+  background-image: -o-linear-gradient(top, #0000, #0000);
+  background-image: linear-gradient(to bottom, #0000, #0000);
+  text-decoration: none;
+  color:#fff;
+}
+
+#wrapper {
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-left: -250px;
+  left: 250px;
+  width: 250px;
+  background: #000;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-nav a
+{
+    color:#fff;
+}
+.sidebar-nav a:hover
+{
+color:#fe7676;
+text-decoration:none;
+}
+.sidebar-brand
+{
+    margin-bottom:20px;
+}
+.sxo_dashboard_masonry_grid
+{
+     -moz-column-width: 25em;
+     -webkit-column-width: 25em;
+     -ms-column-width: 25em;
+     -o-column-width: 25em;
+}
+.sxo_dashboard_masonry_grid_column
+{
+    margin:0;
+}
+.sidebar-nav li
+{
+    padding:5px 0px 5px 0px;
+    text-indent:0px;
+}
+h3
+{
+    padding-left:1.5em;
+}
+ul li, ol li
+{
+margin-left:2.5em;
+}
+.category
+{
+margin-bottom:10px;
+}
+
+@media (max-width:767px) {
+
+    #wrapper {
+      padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+      left: 0;
+    }
+
+    #wrapper.active {
+      position: relative;
+      left: 250px;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+      left: 250px;
+      width: 250px;
+      transition: all 0.4s ease 0s;
+    }
+
+}
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+</style>
+<apex:form >
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"><a href="#"><img src="http://socxo.com/wp-content/uploads/2014/12/socxo-logo3.png"/></a></li>
+            <div class="category">
+                <h3 style="color:white">Categories</h3>
+            </div>
+            
+            <apex:repeat value="{!categorymap}" var="key1">
+                    <!-- Loop through list of account Ids -->
+                   <li>  
+                    <apex:commandLink action="{!test1}" rerender="container" status="status">{!categorymap[key1]}
+                            <apex:param name="p1" assignTo="{!x1}" value="{!key1}" />
+                        </apex:commandLink>
+                    </li>
+                   
+                </apex:repeat>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- content of page -->
+                        <apex:outputPanel id="container">
+            <apex:actionstatus id="status" startText="Loading blurbs.please wait...">
+                <apex:facet name="stop">
+                    <apex:outputPanel >
+
+                        <div class="container-fluid">
+                        <a href="#menu-toggle" id="menu-toggle"><i class="fa fa-outdent"></i></a>
+                            <div class="sxo_dashboard_masonry_grid">
+
+                                <!-- <apex:outputLabel value="{!categorylist[0]}"/> -->
+
+                                <apex:repeat value="{!lstBlurbs}" var="pos1">
+                                    <!-- <br></br>
+                    <APEX:OUTPUTLabel >{!pos1.links__c}</APEX:OUTPUTLabel>
+                    <br></br>
+                    <APEX:OUTPUTLabel >{!pos1.BlurbId__c}</APEX:OUTPUTLabel>
+                    <br></br>
+                    <a href="{!pos1.links__c}" target="_blank"><img id="drag1" src="{!pos1.ImageUrl__c}"  width="300" height="300"></img></a>
+                    <br></br>
+ -->
+
+
+
+                                    <div class="sxo_dashboard_masonry_grid_column">
+                                        <!--- Blurb Structure starts here -->
+                                        <article class="sxo_blurb panel">
+                                            <!--- Blurb Title -->
+                                            <hgroup class="sxo_blurb_title_container">
+                                                <h2 class="sxo_blurb_title">{!pos1.Title}</h2>
+                                                <span class="sxo_blurb_category_name">Entertainment</span>
+                                            </hgroup>
+                                            <!--- Blurb Image -->
+                                            <h2>{!blurbString}</h2>
+                                            <img class="img-responsive sxo_blurb_img" title="" alt="" src="{!pos1.ImageUrl}" />
+                                            <!-- <apex:image styleClass="img-responsive sxo_blurb_img" title="" alt="" value="{!pos1.ImageUrl__c}"/> -->
+                                            <!--- Blurb Description -->
+                                            <p class="sxo_blurb_description">
+                                                {!pos1.Description}
+
+                                            </p>
+                                            <!--- Blurb action area: Edit/Share -->
+                                            <div class="sxo_blurb_actions w-full">
+                                                <div class="pull-left sxo_blurb_btn_edit">
+
+                                                    <apex:commandLink action="{!editblurbtopost}" rerender="container" styleClass="btn btn-default sxo_btn_nostyle" id="blurb_edit_modal">Personalize
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+                                                    <!--  <button class="btn btn-default sxo_btn_nostyle" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-pencil sxo_blurb_btn_edit_icon"></i>Personalize</button>-->
+                                                </div>
+                                                <div class="pull-right sxo_blurb_btn_share">
+                                                    <span class="sxo_blurb_btn_share_text">Auto Schedule to</span>
+                                                    <apex:commandLink action="{!postinfb}" status="status1" rerender="popup1,popup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-facebook"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postintwitter}" status="status1" rerender="twitterpopup1,twitterpopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-twitter"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postinLinkedin}" status="status1" rerender="linkedinPopup1,linkedinPopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-linkedin"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postinChatter}" rerender="chatterpost" status="status1" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn sxo_chatter"> 
+                                                        <i class="sxo_icon_chatter"></i>
+                                                        <apex:param name="bLink" assignTo="{!blurbLink}" value="{!pos1.Url}" />
+                                                        <apex:param name="bTitle" assignTo="{!blurbTitle}" value="{!pos1.Title}" />
+                                                        <apex:param name="bDescription" assignTo="{!blurbDesc}" value="{!pos1.Description}" />
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.CategoryId}" />
+                                                    </apex:commandLink>
+                                                </div>
+                                            </div>
+
+                                            <apex:outputPanel rendered="{!pos1.Editmode}" id="blurbeitor">
+                                             
+
+
+                                                <div class="modal fade in" id="blurb_edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block; padding-right: 16px;">
+                                                    <div class="modal-backdrop fade in" style="height: 471px;"></div>
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content sxo_blurb_edit_content_wraper pull-none">
+                                                            <header class="modal-header sxo_blurb_edit_header">
+                                                                <h3 class="modal-title sxo_blurb_edit_title">Personalize</h3>
+
+                                                            </header>
+
+                                                            <div class="modal-body sxo_blurb_edit_body">
+                                                                <section class="sxo_blurb_edit_tab">
+                                                                    <div role="tabpanel">
+                                                                        <ul class="nav nav-tabs" role="tablist">
+                                                                            <li role="presentation" class="sxo_blurb_edit_tab_switch active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-facebook visible-sm visible-xs"></i><span class="visible-lg visible-md">Facebook</span></a></li>
+                                                                            <li role="presentation" class="sxo_blurb_edit_tab_switch"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-twitter visible-sm visible-xs"></i><span class="visible-lg visible-md">Twitter</span></a></li>
+                                                                            <li role="presentation" class="sxo_blurb_edit_tab_switch"><a class="sxo_blurb_edit_tab_switch" href="#messages" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-linkedin visible-sm visible-xs"></i><span class="visible-lg visible-md">LinkedIn</span></a></li>
+
+                                                                        </ul>
+
+
+
+
+
+                                                                        <div class="tab-content sxo_blurb_edit_tab_content">
+                                                                            <div role="tabpanel" class="tab-pane active" id="home">
+                                                                                <form>
+                                                                                Facebook
+                                                                                    <div class="form-group">
+                                                                                        Title
+
+                                                                                        <apex:input type="text" styleClass="form-control" value="{!pos1.fbtittle}" />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        Comment
+                                                                                        <apex:input type="text" styleClass="form-control" value="{!pos1.fbcomment}" />
+                                                                                        Description
+                                                                                        <apex:input type="text" styleClass="form-control" value="{!pos1.fbdecription}" />
+
+                                                                                    </div>
+                                                                                   
+                                                                                    <!--button-->
+                                                                                    <div class="clearfix visible-xs"></div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div role="tabpanel" class="tab-pane" id="profile">
+                                                                                <form>
+                                                                                     <div class="form-group">
+                                                                                        Twitter
+                                                                                        <apex:input type="text" styleClass="form-control" value="{!pos1.tweeterpost}" />
+                                                                                    </div>
+                                                                                    
+    
+
+                                                                                </form>
+                                                                            </div>
+                                                                            <div role="tabpanel" class="tab-pane" id="messages">
+                                                                                <form>
+                                                                                    LinkedIn
+                                                                                     <div class="form-group">
+                                                                                       
+                                                                                        Title
+                                                                                        <apex:input type="text" styleClass="form-control" value="{!pos1.lnktittle}" />
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        Comment
+                                                                                        <apex:input type="text" styleClass="form-control" value="{!pos1.lnkcomment}" />
+                                                                                       Description         
+                                                                                        <apex:input type="text" styleClass="form-control" value="{!pos1.lnkdecription}" />
+
+                                                                                    </div>
+                                                                                </form>
+
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </section>
+
+                                                                <div class="form-group sxo_blurb_edit_btn_save_wraper pull-left">
+                                                                    <apex:commandLink action="{!stopeditblurbtopost}" rerender="container" styleClass="">Close
+                                                                    </apex:commandLink>
+
+                                                                </div>
+                                                                <div class="form-group sxo_blurb_edit_btn_share_wraper">
+                                                                    <div class="pull-right sxo_blurb_btn_share">
+                                                                        <span class="sxo_blurb_btn_share_text">Auto Schedule to</span>
+                                                                        <!-- <apex:commandLink action="{!postinfb}" status="status1" rerender="popup1,popup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">Post In FB
+                                                                            <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                                            <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                                        </apex:commandLink>
+
+                                                                        <apex:commandLink action="{!postintwitter}" status="status1" rerender="twitterpopup1,twitterpopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">Post In Twitter
+                                                                            <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                                            <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                                        </apex:commandLink>
+
+                                                                        <apex:commandLink action="{!postinLinkedin}" status="status1" rerender="linkedinPopup1,linkedinPopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn"> Post in LinkedIn
+                                                                            <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                                            <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                                        </apex:commandLink> -->
+
+                                                                        <apex:commandLink action="{!postinfb}" status="status1" rerender="popup1,popup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-facebook"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postintwitter}" status="status1" rerender="twitterpopup1,twitterpopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-twitter"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postinLinkedin}" status="status1" rerender="linkedinPopup1,linkedinPopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-linkedin"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!pos1.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!pos1.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    
+
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </apex:outputPanel>
+                                        </article>
+                                        <!--- Blurb Structure ends here -->
+                                    </div>
+
+
+
+
+
+                                    <br></br>
+                                    <apex:actionstatus id="status1" startText="Posting..." />
+                                </apex:repeat>
+
+                            </div>
+
+                        </div>
+                    </apex:outputPanel>
+                </apex:facet>
+            </apex:actionstatus>
+        </apex:outputPanel>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+        <!--<apex:actionFunction name="bringontheblurbs" action="{!test1}" rerender="container" status="status">
+            <apex:param name="p1" assignTo="{!x1}" value=""/>
+            </apex:actionFunction>-->
+        
+
+        <!--to show the blurbs-->
+        <!-- BLURB POPUP STARTS HERE -->
+    
+           
+        
+                            <apex:outputPanel rendered="{!statusofblurb}" >
+                                         <div class="modal fade" id="blurb_load" tabindex="-1" role="dialog" aria-labelledby="blurb_load" aria-hidden="true">
+                  <div class="modal-dialog">
+                        <div class="modal-content sxo_blurb_edit_content_wraper pull-none"> 
+                          <div class="modal-body sxo_blurb_edit_body">       
+                                <div class="sxo_dashboard_masonry_grid_column">
+                                <!--- Blurb Structure starts here -->
+                                <article class="sxo_blurb panel">
+                                    <!--- Blurb Title -->
+                                    <hgroup class="sxo_blurb_title_container">
+                                        <h2 class="sxo_blurb_title">{!blurbtopopup.Title}</h2>
+                                        <span class="sxo_blurb_category_name">Entertainment</span>
+                                    </hgroup>
+                                    <!--- Blurb Image -->
+                                    <h2>{!blurbString}</h2>
+                                    <img class="img-responsive sxo_blurb_img" title="" alt="" src="{!blurbtopopup.ImageUrl}" />
+                                    <!-- <apex:image styleClass="img-responsive sxo_blurb_img" title="" alt="" value="{!blurbtopopup.ImageUrl__c}"/> -->
+                                    <!--- Blurb Description -->
+                                    <p class="sxo_blurb_description">
+                                        {!blurbtopopup.Description}
+                            
+                                    </p>
+                                    <!--- Blurb action area: Edit/Share -->
+                                    <div class="sxo_blurb_actions w-full">
+                                        <div class="pull-left sxo_blurb_btn_edit">
+                            
+                                            <apex:commandLink action="{!editblurbtopost}" rerender="container" styleClass="btn btn-default sxo_btn_nostyle" id="blurb_edit_modal">Personalize
+                                                <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                            </apex:commandLink>
+                                            <!--  <button class="btn btn-default sxo_btn_nostyle" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-pencil sxo_blurb_btn_edit_icon"></i>Personalize</button>-->
+                                        </div>
+                                        <div class="pull-right sxo_blurb_btn_share">
+                                            <span class="sxo_blurb_btn_share_text">Auto Schedule to</span>
+                                            <apex:commandLink action="{!postinfb}" status="status1" rerender="popup1,popup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                <i class="fa fa-facebook"></i>
+                                                <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                            </apex:commandLink>
+                            
+                                            <apex:commandLink action="{!postintwitter}" status="status1" rerender="twitterpopup1,twitterpopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                <i class="fa fa-twitter"></i>
+                                                <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                            </apex:commandLink>
+                            
+                                            <apex:commandLink action="{!postinLinkedin}" status="status1" rerender="linkedinPopup1,linkedinPopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                <i class="fa fa-linkedin"></i>
+                                                <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                            </apex:commandLink>
+                            
+                                            <apex:commandLink action="{!postinChatter}" status="status1" rerender="chatterpost" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn sxo_chatter">
+                                                <i class="sxo_icon_chatter"></i>
+                                                <apex:param name="bLink" assignTo="{!blurbLink}" value="{!blurbtopopup.Url}" />
+                                                <apex:param name="bTitle" assignTo="{!blurbTitle}" value="{!blurbtopopup.Title}" />
+                                                <apex:param name="bDescription" assignTo="{!blurbDesc}" value="{!blurbtopopup.Description}" />
+                                                <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.CategoryId}" />
+                                            </apex:commandLink>
+                                        </div>
+                                    </div>
+                            
+                                    <apex:outputPanel rendered="{!blurbtopopup.Editmode}" id="blurbeitor">
+                                        Hai
+                            
+                            
+                                        <div class="modal fade in" id="blurb_edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block; padding-right: 16px;">
+                                            <div class="modal-backdrop fade in" style="height: 471px;"></div>
+                                            <div class="modal-dialog">
+                                                <div class="modal-content sxo_blurb_edit_content_wraper pull-none">
+                                                    <header class="modal-header sxo_blurb_edit_header">
+                                                        <h3 class="modal-title sxo_blurb_edit_title">Personalize</h3>
+                            
+                                                    </header>
+                            
+                                                    <div class="modal-body sxo_blurb_edit_body">
+                                                        <section class="sxo_blurb_edit_tab">
+                                                            <div role="tabpanel">
+                                                                <ul class="nav nav-tabs" role="tablist">
+                                                                    <li role="presentation" class="sxo_blurb_edit_tab_switch"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-facebook visible-sm visible-xs"></i><span class="visible-lg visible-md">Facebook</span></a></li>
+                                                                    <li role="presentation" class="sxo_blurb_edit_tab_switch"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-twitter visible-sm visible-xs"></i><span class="visible-lg visible-md">Twitter</span></a></li>
+                                                                    <li role="presentation" class="sxo_blurb_edit_tab_switch"><a class="sxo_blurb_edit_tab_switch" href="#messages" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-linkedin visible-sm visible-xs"></i><span class="visible-lg visible-md">LinkedIn</span></a></li>
+                            
+                                                                </ul>
+                            
+                            
+                            
+                            
+                            
+                                                                <div class="tab-content sxo_blurb_edit_tab_content">
+                                                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                                                        <form>
+                                                                            <div class="form-group">
+                            
+                                                                                <apex:input type="text" styleClass="form-control" value="{!blurbtopopup.Title}" />
+                                                                            </div>
+                                                                            <div class="form-group">
+                            
+                                                                                <apex:input type="text" styleClass="form-control" value="{!blurbtopopup.fbcomment}" />
+                            
+                                                                                <apex:input type="text" styleClass="form-control" value="{!blurbtopopup.fbdecription}" />
+                            
+                                                                            </div>
+                            
+                            
+                                                                            <!--button-->
+                                                                            <div class="clearfix visible-xs"></div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div role="tabpanel" class="tab-pane" id="profile">
+                                                                        <form>
+                                                                            <div class="form-group">
+                            
+                                                                                <apex:input type="text" styleClass="form-control" value="{!blurbtopopup.tweeterpost}" />
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div role="tabpanel" class="tab-pane" id="messages">
+                                                                        <form>
+                                                                            <div class="form-group">
+                            
+                                                                                <apex:input type="text" styleClass="form-control" value="{!blurbtopopup.lnktittle}" />
+                                                                            </div>
+                                                                            <div class="form-group">
+                            
+                                                                                <apex:input type="text" styleClass="form-control" value="{!blurbtopopup.lnkcomment}" />
+                            
+                                                                                <apex:input type="text" styleClass="form-control" value="{!blurbtopopup.lnkdecription}" />
+                            
+                                                                            </div>
+                                                                        </form>
+                            
+                            
+                                                                    </div>
+                            
+                                                                </div>
+                            
+                                                            </div>
+                            
+                            
+                                                        </section>
+                            
+                                                        <div class="form-group sxo_blurb_edit_btn_save_wraper pull-left">
+                                                            <apex:commandLink action="{!stopeditblurbtopost}" rerender="container" styleClass="">Close
+                                                            </apex:commandLink>
+                            
+                                                        </div>
+                                                        <div class="form-group sxo_blurb_edit_btn_share_wraper">
+                                                            <div class="pull-right sxo_blurb_btn_share">
+                                                                <span class="sxo_blurb_btn_share_text">Auto Schedule to hi</span>
+                                                                
+                                                                 <apex:commandLink action="{!postinfb}" status="status1" rerender="popup1,popup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                                    <i class="fa fa-facebook"></i>
+                                                                    <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                                    <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                                                </apex:commandLink>
+                                                
+                                                                <apex:commandLink action="{!postintwitter}" status="status1" rerender="twitterpopup1,twitterpopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                                    <i class="fa fa-twitter"></i>
+                                                                    <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                                    <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                                                </apex:commandLink>
+                                                
+                                                                <apex:commandLink action="{!postinLinkedin}" status="status1" rerender="linkedinPopup1,linkedinPopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                                    <i class="fa fa-linkedin"></i>
+                                                                    <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                                    <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                                                </apex:commandLink>
+                                                
+                                                                <apex:commandLink action="{!postinChatter}" status="status1" rerender="chatterpost" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn sxo_chatter">
+                                                                    <i class="sxo_icon_chatter"></i>
+                                                                    <apex:param name="bLink" assignTo="{!blurbLink}" value="{!blurbtopopup.Url}" />
+                                                                    <apex:param name="bTitle" assignTo="{!blurbTitle}" value="{!blurbtopopup.Title}" />
+                                                                    <apex:param name="bDescription" assignTo="{!blurbDesc}" value="{!blurbtopopup.Description}" />
+                                                                    <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                                    <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.CategoryId}" />
+                                                                </apex:commandLink> 
+
+                                                                <!-- <apex:commandLink action="{!postinfb}" status="status1" rerender="popup1,popup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-facebook"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postintwitter}" status="status1" rerender="twitterpopup1,twitterpopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-twitter"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postinLinkedin}" status="status1" rerender="linkedinPopup1,linkedinPopup" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn">
+                                                        <i class="fa fa-linkedin"></i>
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.EnterpriseBlurbId}" />
+                                                    </apex:commandLink>
+
+                                                    <apex:commandLink action="{!postinChatter}" rerender="chatterpost" styleClass="btn btn-md btn-icon btn-info sxo_blurb_btn sxo_chatter"> 
+                                                        <i class="sxo_icon_chatter"></i>
+                                                        <apex:param name="bLink" assignTo="{!blurbLink}" value="{!blurbtopopup.Url}" />
+                                                        <apex:param name="bTitle" assignTo="{!blurbTitle}" value="{!blurbtopopup.Title}" />
+                                                        <apex:param name="bDescription" assignTo="{!blurbDesc}" value="{!blurbtopopup.Description}" />
+                                                        <apex:param name="p2" assignTo="{!xfb1}" value="{!blurbtopopup.BlurbId}" />
+                                                        <apex:param name="p3" assignTo="{!xfb2}" value="{!blurbtopopup.CategoryId}" />
+                                                    </apex:commandLink>
+ -->
+                                                            </div>
+                                                        </div>
+                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                    </apex:outputPanel>
+        
+        
+        
+    </article>
+    <!--- Blurb Structure ends here -->
+</div>
+</div>
+            </div>
+      </div>
+</div>
+ <!-- OPANEL-->  
+</apex:outputPanel>
+     
+        
+        <!-- rmvd -->
+
+        <!--show a pop up if user is not connected to fb-->
+
+
+        <apex:outputPanel id="popup">
+            <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopUp}">
+                Your socxo account is currently not connected to facebook. Please click the button below to authenticate.
+                <br/>
+                <br/>
+                <br/>
+                <apex:commandButton value="Connect to fb" onclick="window.open('/apex/FacebookConnector?status={!JSENCODE(fbstatus)}&blurbid={!xfb1}&ebid={!xfb2}', '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=300px, left=500px, width=400, height=200');" rerender="popup" oncomplete="window.close();" />
+                <apex:commandButton value="Cancel" action="{!closePopup}" rerender="popup" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+        <!--https://developer.salesforce.com/forums/ForumsMain?id=906F0000000AZFXIA4-->
+
+        <apex:outputPanel id="popup1">
+            <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopup1}">
+                {!fbmessage}
+                <apex:commandButton value="OK" action="{!closePopup1}" rerender="popup1" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+
+        <apex:outputPanel id="twitterpopup">
+            <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopup}">
+                Your SoCXO account is not connected to Twitter. Please click the button below to authenticate.
+                <br/>
+                <br/>
+                <br/>
+                <apex:commandButton value="Connect to Twitter" onclick="window.open('/apex/twitterconnector?status={!JSENCODE(twitterstatus)}&blurbid={!xfb1}&ebid={!xfb2}', '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=300px, left=500px, width=400, height=200');" rerender="popup" oncomplete="window.close();" />"
+                <apex:commandButton value="Cancel" action="{!closePopup}" rerender="twitterpopup" />
+                <!--<script type="text/javascript">
+                $(document).ready(function () {
+              window.open('/apex/twitterconnector?status='+{!JSENCODE(twitterstatus)}+'&blurbid='+{!xfb1}+'&ebid='+{!xfb2}, "popupWindow", "width=600,height=600,scrollbars=yes");});           
+               </script> -->
+
+            </apex:outputPanel>
+
+        </apex:outputPanel>
+
+        <apex:outputPanel id="twitterpopup1">
+            <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopup1}">
+                {!twittermessage}
+                <apex:commandButton value="OK" action="{!closePopup1}" rerender="twitterpopup1" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <apex:outputPanel id="linkedinPopup">
+            <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopup}">
+                Your SoCXO account is not connected to LinkedIn. Please click the button below to authenticate.
+                <br/>
+                <br/>
+                <br/>
+                <apex:commandButton value="Connect to LinkedIn" onclick="window.open('/apex/linkedinPage?status={!JSENCODE(linkedinstatus)}&blurbid={!xfb1}&ebid={!xfb2}', '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=300px, left=500px, width=400, height=200');" rerender="popup" oncomplete="window.close();" />
+                <apex:commandButton value="Cancel" action="{!closePopup}" rerender="linkedinPopup" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+        <apex:outputPanel id="linkedinPopup1">
+            <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopup1}">
+                {!linkedinMessage}
+                <apex:commandButton value="Close" action="{!closePopup1}" rerender="linkedinPopup1" />
+            </apex:outputPanel>
+        </apex:outputPanel>
+
+    </apex:form>
+
+    <style type="text/css">
+        .customPopup {
+            background-color: white;
+            border-style: solid;
+            border-width: 2px;
+            left: 50%;
+            padding: 10px;
+            position: absolute;
+            z-index: 9999;
+            /* These are the 3 css properties you will need to tweak so the pop 
+            up displays in the center of the screen. First set the width. Then set 
+            margin-left to negative half of what the width is. You can also add 
+            the height property for a fixed size pop up.*/
+            
+            width: 500px;
+            margin-left: -250px;
+            top: 100px;
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            debugger;
+            $(".btn-default").click(function() {
+                $("#blurb_edit_modal").modal('show');
+            });
+            $('#myTab a').click(function(e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+             $(window).load(function(){
+                $('#blurb_load').modal('show');
+            });
+            
+        });
+    </script>
+    <script type="text/javascript">
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</apex:page>

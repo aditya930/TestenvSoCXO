@@ -1,0 +1,82 @@
+<apex:page controller="SOCXOclass" sidebar="false" standardStylesheets="false" docType="html-5.0">
+
+    <!--setting up validation.Referred the following docs:
+http://th3silverlining.com/2010/03/02/visualforce-form-validation-enhanced/
+https://developer.salesforce.com/page/Developing_Apps_with_jQuery -->
+
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+    <apex:includeScript value="https://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js" />
+    <apex:stylesheet value="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('[id$=form1]').validate();
+
+            $('[id$=name1]').rules("add", {
+                required: true,
+                minlength: 5
+            });
+
+            $('[id$=pass1]').rules("add", {
+                required: true,
+                minlength: 5
+            });
+            /* Customised the messages */
+            jQuery.validator.messages.required = "You better have entered a value.. or else!";
+            jQuery.validator.messages.equalTo = "No silly, you're supposed to type the same set of characters AGAIN.";
+        });
+    </script>
+
+    <div class="panel panel-default">
+        <div class="panel panel-body">
+            <apex:form id="form1">
+                <apex:pageMessages id="showmsg"></apex:pageMessages>
+                <apex:outputPanel rendered="true">
+                    <apex:outputLabel rendered="{!req1}">Please provide your SOCXO login credentials to proceed further</apex:outputLabel>
+                    <apex:outputLabel rendered="{!req2}">Token is expired. Please login again.</apex:outputLabel>
+
+                    <div class="header" align="center">
+                        <a href="http://www.socxo.com" target="_blank"> <img src="{!$Resource.socxologo1}" /> </a>
+                    </div>
+
+
+                    <div class="form-group" align="center">
+                        <h1>SoCXO CREDENTIALS</h1>
+                    </div>
+
+
+
+
+                    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                        <div class="panel panel-default">
+                            <div class="panel panel-body ">
+
+                                <div class="form-group">
+
+                                    Username
+                                    <apex:input value="{!username}" type="text" styleClass="form-control" html-placeholder="Email" required="true" />
+                                </div>
+
+                                <div class="form-group">
+
+                                    Password
+                                    <apex:inputSecret value="{!password}" styleClass="form-control" html-placeholder="Password" required="true" />
+                                </div>
+
+                                <div class="form-group">
+                                    <apex:commandButton action="{!authorize}" value="Authorize" id="authButton" styleClass="form-control btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </apex:outputPanel>
+            </apex:form>
+
+        </div>
+    </div>
+
+
+</apex:page>

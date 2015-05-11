@@ -1,0 +1,11 @@
+<apex:page controller="TwitterIntegrationController" sidebar="false" showHeader="false" action="{!twitterUserDetails}">
+    <script>
+        function redirect(){
+        window.location.href = '/apex/paneltest002';
+        }
+    </script>
+    
+    Successfully Connected to Twitter!
+    Please go to the Blurb Page to post your blurbs!
+    <button onclick="redirect()">GO</button>
+</apex:page>

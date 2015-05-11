@@ -1,0 +1,271 @@
+<apex:page standardStylesheets="false" sidebar="false" controller="socxo_admin_settings" title="SoCXO Administrator Settings" >
+     <apex:stylesheet value="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <script type="text/javascript">
+    
+    
+        function getUserDetails()
+        {       
+            
+                    var div = document.getElementById('userlist');
+                    
+                    
+                            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.socxo_admin_settings.getUserDetails}',                
+                function(result, event){
+                    if (event.status){                        
+                        var l = result.length;
+                        if(l==0)
+                        {
+                            document.getElementById("userDetails").innerHTML='<p>No Results!</p>';
+                        }
+                        else{
+                            var markup = "<div id='no-more-tables'>";
+
+                                markup+="<table class='col-md-12 table-bordered table-striped table-condensed cf'>"+
+                                        "<thead class='cf'>"+
+                                        "<tr>" + 
+                                        "<th> </th>" + 
+                                        "<th>Id</th>" + 
+                                        "<th>First Name</th>" + 
+                                        "<th>Last Name</th>" + 
+                                        "<th>Email</th>" + 
+                                        "<th>Profile ID</th>" + 
+                                        "</tr>"+
+                                        "</thead>"+
+                                        "<tbody>";
+                            for(var i=0; i<l;i++)
+                            {
+                                var recordDetail = 
+                                    '<tr>' + 
+                                    "<td>" + "<input type='checkBox' class='userCheck' value='" + result[i].Email + "' onClick='checkSelection();' /> " + "</td>" +
+                                    "<td data-title='Id'>" + result[i].Id + "</td>" +                                    
+                                    "<td data-title='First Name'>" + result[i].FirstName + "</td>" +
+                                    "<td data-title='Last Name'>" + result[i].LastName + "</td>" +
+                                    "<td data-title='Email'>" + result[i].Email + "</td>" +
+                                    "<td data-title='Profile ID'>" + result[i].Profile.Name + "</td>" +
+                                    '</tr>';
+                                    
+                                markup += recordDetail;
+                            }
+                            markup += '</tbody>'+
+                                        '</table>'+
+                                        '</div>';
+                            document.getElementById("userDetails").innerHTML = markup;
+                            document.getElementById("getUserDetails").removeAttribute("disabled");
+                            document.body.style.cursor="default";
+                        }                                                                       
+                    }
+                    else if (event.type === 'exception') {
+                        document.getElementById("userDetails").innerHTML = event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                    }
+                    else{
+                        document.getElementById("userDetails").innerHTML = event.message;
+                    }
+                },
+                {escape: true}
+            );
+        }
+        
+        window.onload = function() {
+        
+    getUserDetails();
+    }
+    
+    function getEmails(){
+
+        alert('Success!');
+        var emailList = ''; 
+        var inputElements = document.getElementsByClassName('userCheck');
+        for(var i=0; i<inputElements.length; i++){
+              if(inputElements[i].checked){
+                  if(emailList == ''){
+                      emailList = emailList + inputElements[i].value;
+                  }
+                  else{
+                    emailList = emailList + ', ' + inputElements[i].value;  
+                  }
+              }
+        }
+        //document.getElementById("populatedEmails").innerHTML = emailList;
+        //document.getElementById("populatedEmails").focus();
+        
+        Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.socxo_admin_settings.pushEmails}',
+                emailList,
+                function(result, event){
+                    if (event.status){                                                
+                        //document.getElementById("messages").innerHTML = result; 
+                      
+                        var obj = JSON.parse(result);  
+                        alert(obj.message);                                                                                                            
+                    }
+                    else if (event.type === 'exception') {
+                        document.getElementById("messages").innerHTML = event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                       
+
+                    }
+                    else{
+                        document.getElementById("messages").innerHTML = event.message;
+                        
+
+                    }
+                },
+                {escape: true}
+            );
+    }
+
+
+    
+    function checkSelection(){
+        var isChecked = false;
+        var inputElements = document.getElementsByClassName('userCheck');
+        for(var i=0; i<inputElements.length; i++){
+            if(inputElements[i].checked){
+                isChecked = true;
+            }
+        }
+        if(isChecked == true){
+            //document.getElementById("btnGetEmails").removeAttribute("disabled");
+        }
+        else{
+            //document.getElementById("btnGetEmails").setAttribute("disabled","true");
+            //document.getElementById("populatedEmails").innerHTML="";
+        }
+    }
+    
+    function selectDeselectAll(){
+        var isChecked = document.getElementById("chkSelectAll").checked;
+        var inputElements = document.getElementsByClassName('userCheck');
+        for(var i=0; i<inputElements.length; i++){
+            if(isChecked == true){
+                inputElements[i].checked = true;
+            }
+            else{
+                inputElements[i].checked = false;
+            }
+            checkSelection();
+        }
+    }
+    
+    function disableButton(){
+        document.body.style.cursor="wait";
+        document.getElementById("getUserDetails").setAttribute("disabled","true");
+        document.getElementById("userDetails").innerHTML="";
+        document.getElementById("populatedEmails").innerHTML="";        
+    }
+    
+     function gotoSoxco(){
+     var windowCount = 0;
+    var data = 'username='+ '{!$User.Username}' +'&email='+ '{!$User.Email}';
+    var mapForm = document.createElement("form");
+    var tgt = "Map" + (windowCount++);
+    // mapForm.target = "_parent";
+    mapForm.target = tgt;
+    mapForm.method = "GET";
+    mapForm.action = "http://freetest.socxo.com/Account/login";             
+    var mapInput = document.createElement("input");
+    mapInput.type = "text";
+    mapInput.name = "parameters";
+    mapInput.value = JSON.stringify(data);
+    mapForm.appendChild(mapInput);
+    document.body.appendChild(mapForm);
+    mapForm.submit();
+    
+    }
+    </script>
+    <Style>
+    @media only screen and (max-width: 800px) {
+    
+    .select_all
+    {
+        display:none;
+    }
+    #no-more-tables table
+    {
+        padding-left:0;
+        padding-right:0;
+    }
+    /* Force table to not be like tables anymore */
+    #no-more-tables table, 
+    #no-more-tables thead, 
+    #no-more-tables tbody, 
+    #no-more-tables th, 
+    #no-more-tables td, 
+    #no-more-tables tr { 
+        display: block; 
+    }
+ 
+    /* Hide table headers (but not display: none;, for accessibility) */
+    #no-more-tables thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+ 
+    #no-more-tables tr { border: 1px solid #ccc; }
+ 
+    #no-more-tables td { 
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 50%; 
+        white-space: normal;
+        text-align:left;
+    }
+ 
+    #no-more-tables td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+ 
+    /*
+    Label the data
+    */
+    #no-more-tables td:before { content: attr(data-title); }
+}
+                    
+
+ 
+    </Style>
+ <apex:stylesheet value="{$Resource.Responsivetable}"/>
+ 
+ <!--<div class="footer" align="center">
+           <a href="http://www.socxo.com" target="_blank">  <img src="{!$Resource.socxologo1}"/> </a>
+        </div>
+ 
+ <div class="row" style="text-align: center;">
+    <h1>SoCXO Administrator Settings</h1>
+    </div> 
+    <div style="margin-bottom:10px; text-align:right;" class="col-md-6 col-md-offset-6">
+         <input type ="button" value="Use SoCXO" id="socxo" class="form-control" onclick="gotoSoxco()" style="width:200px; display:inline;"/> 
+         <input type="button" id="getUserDetails" onClick="disableButton(); getUserDetails();" value="Send Invitation" class="form-control" style="width:200px; display:inline;" title="Get User Details"/>
+     </div> -->
+     <div>
+        <div id="userlist" align="center">
+            <div class="select_all" style="text-align:left; width:50%; float:left;">
+            <input type='checkBox' id='chkSelectAll' title='Check/Uncheck All'  onClick='selectDeselectAll();' />Select All 
+            </div>
+            <div id="userDetails" align="center" >  
+                 
+            </div>
+             <div class="col-md-2 col-md-offset-10" style="margin-top:10px">
+             <input type="button" id="btnGetEmails" onClick="getEmails();" title="Populate Emails" value="Send Invitation" class="form-control" />
+            </div>
+            <div id="populatedEmails" tabindex="-1" style="outline:0"> 
+        </div>       
+    </div>
+        </div>
+    <div id="messages">
+        
+    </div>
+</apex:page>

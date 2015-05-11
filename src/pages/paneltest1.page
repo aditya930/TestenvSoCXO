@@ -1,0 +1,49 @@
+<apex:page controller="AuthControllerforproductrefined1">
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+<script>
+        $(document).ready(function() {
+        jQuery.ajaxSetup({
+            beforeSend:function(xhr) {
+                xhr.setRequestHeader("content-type","application/json");
+                xhr.setRequestHeader("content-type","message/rfc822");
+                xhr.setRequestHeader("Accept","application/json");
+                xhr.setRequestHeader('Authorization', 'Bearer ' +{!currenttoken1[0]}.Access_Token__c);
+
+            }
+        });
+
+         jQuery.ajax({
+                    type: 'GET',
+                    url: 'http://'+{!currenttoken1[0]}.tenanentendpoint__c+'/api/category/private',
+
+                    success: function(response) {
+                       alert('hi');
+                    },
+                    error:{ alert('Error');}
+                });
+        }); 
+    </script>
+<apex:form >
+
+        
+            <!--<apex:actionFunction name="bringontheblurbs" action="{!test1}" rerender="container" status="status">
+            <apex:param name="p1" assignTo="{!x1}" value=""/>
+            </apex:actionFunction>-->
+        <div id="tabs">
+        <ul>
+
+            <apex:repeat value="{!categorymap}" var="key1"> <!-- Loop through list of account Ids -->
+
+                <apex:outputPanel styleClass="sectionbox" layout="block">
+                <!--<apex:commandLink onclick="bringontheblurbs({!KEY1});">{!categorymap[key1]}</apex:commandLink>-->
+                <apex:commandLink status="status">{!categorymap[key1]}
+                <apex:param name="p1" assignTo="{!x1}" value="{!key1}"/>
+                </apex:commandLink>
+                </apex:outputPanel>
+            </apex:repeat>
+         </ul>
+        </div>
+ </apex:form>
+ </apex:page>

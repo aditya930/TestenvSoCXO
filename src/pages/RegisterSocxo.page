@@ -1,0 +1,61 @@
+<apex:page showHeader="false" sidebar="false" controller="socxouserRegistration" standardStylesheets="false" action="{!init}" docType="html-5.0">
+    <apex:stylesheet value="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <apex:form >
+    <apex:pageMessages id="showmsg"></apex:pageMessages>
+        
+    <div class="footer" align="center">
+           <a href="http://www.socxo.com" target="_blank">  <img src="{!$Resource.socxologo1}"/> </a>
+        </div>
+    
+    <div class="container">
+        <div class="page=header" align="center">
+            <h3>Sign Up for SoCXO !</h3>
+        </div>
+    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+        <div class="panel panel-default">
+            <div class="panel panel-body ">
+
+                <div class="form-group">
+                    
+                    <apex:input value="{!Email}"  type="text"  styleClass="form-control" html-placeholder="Email" required="true"/>
+                </div>
+
+                <div class="form-group">
+                    
+                     <apex:input value="{!Fullname}" styleClass="form-control" html-placeholder="Fullname" required="true"/>
+                </div>
+                <div class="form-group">
+                   
+                     <apex:input value="{!Firstname}"  type="text"  styleClass="form-control" html-placeholder="Firstname" required="true"/>
+                </div>
+                
+
+                <div class="form-group">
+                    
+                     <apex:inputSecret value="{!Password}"  styleClass="form-control" html-placeholder="Password" required="true"/>
+                </div>
+
+                <div class="form-group">
+                  
+                     <apex:inputSecret value="{!ConfirmPwd}"    styleClass="form-control" html-placeholder="Confirm Password" required="true"/>
+                </div>
+
+                <div class="form-group">
+                    
+                     <apex:commandButton action="{!registerUser}" value="Sign Up" styleClass="form-control btn btn-primary"/>
+
+
+                                                
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+
+    </div>
+
+    
+    </apex:form>
+
+</apex:page>

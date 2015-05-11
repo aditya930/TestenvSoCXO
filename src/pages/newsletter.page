@@ -1,0 +1,458 @@
+<apex:page standardController="Lead" showHeader="false" extensions="AuthControllerforproductrefined,sendLetter,sendEmail">
+    <apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/Blurbstyles.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/socxo.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/font-awesome.css')}" />
+    <apex:variable var="PARTNER_URL" value="{!$Api.Partner_Server_URL_290}" />
+    <apex:variable var="PARTNER_URL_SPLIT" value="{!
+    LEFT(PARTNER_URL,FIND('.visual.force.com',PARTNER_URL)-1)
+  }" />
+    <apex:variable var="POD" value="{!
+    MID(PARTNER_URL_SPLIT,FIND('.',PARTNER_URL_SPLIT)+1,LEN(PARTNER_URL_SPLIT))
+  }" />
+    <apex:variable var="SESSION_ID" value="{!$Api.Session_ID}" />
+    <apex:variable var="SERVER_URL" value="{!'https://' & POD & '.salesforce.com/'}" />
+
+    <apex:form >
+
+        <style>
+            #div1 {
+                width: 80%;
+                margin-left: 10%;
+                height: 100px;
+                padding: 10px;
+                border: 1px dashed #aaaaaa;
+            }
+            #contacts {
+                float: right;
+                border: 1px solid black;
+                width: 19.5%;
+                height: 90%;
+            }
+            #newslettr {
+                float: right;
+                border: 1px solid black;
+                width: 50%;
+                height: 90%;
+            }
+            img {
+                width: 100px;
+                height: 100px;
+            }
+            #container {
+                height: 100%;
+                width: 100%;
+            }
+            #divContainer {
+                border: 1px solid black;
+                height: 50%;
+            }
+            #getBlurb {
+                float: right;
+                border: 1px solid black;
+                width: 30%;
+                height: 90%;
+            }
+        </style>
+
+        <script>
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+
+            function dropback(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+
+                document.getElementById(data).setAttribute("style", "width: 100px; height:100px");
+
+                ev.target.appendChild(document.getElementById(data));
+            }
+
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                document.getElementById(data).setAttribute("style", "font-size: 50px;");
+                document.getElementById(data).setAttribute("style", "width: 100%;height:100%");
+                ev.target.appendChild(document.getElementById(data));
+            }
+        </script>
+
+
+        <apex:outputPanel rendered="{!req}">
+            You are currently Logged Out of SOCXO. Please Login to continue.
+            <br/>
+            <br/> SOCXO CREDENTIALS
+            <br/>
+            <br/> USERname
+            <apex:inputtext value="{!username}" label="Username" />
+            <br/>
+            <br/> passWORD
+            <apex:inputtext value="{!password}" label="Password" />
+            <br/>
+            <br/>
+            <apex:commandButton action="{!authorize}" value="Authorize" id="authButton" rerender="out1,out2,out3" />
+            <p/>
+        </apex:outputPanel>
+
+        <apex:outputLabel value="{!postbody}" id="out1"></apex:outputLabel>
+        <br/>
+        <br/>
+        <br/>
+        <div id="container">
+            <div id="getBlurb" ondragover="allowDrop(event)" ondrop="dropback(event)">
+                <apex:commandButton action="{!Categories}" value="Get Categories" />
+                <apex:selectList value="{!categories}" multiselect="true">
+                    <apex:selectOptions value="{!Items}" />
+                </apex:selectList>
+                <p/>
+                <apex:commandButton value="Related Blurbs" action="{!test}" rerender="out,out4,out33" status="status" />
+                <apex:outputPanel id="out">
+                    <apex:actionstatus id="status" startText="testing...">
+                        <apex:facet name="stop">
+                            <apex:outputPanel >
+                                <p>You have selected:</p>
+                                <apex:dataList value="{!categories}" var="c">{!c}</apex:dataList>
+                                <apex:repeat value="{!categorylist}" var="pos1">
+                                    <img id="{!pos1.imageurl__c}" src="{!pos1.imageurl__c}" draggable="true" ondragstart="drag(event)" width="336" height="69" />
+                                </apex:repeat>
+                                <img id="drag2" src="https://t1.gstatic.com/images?q=tbn:ANd9GcTgAFf7w1WZ--TLk2zk8vz_GxS_OI6Uf-hcwWWW3N8XoDR-9osQmQ" draggable="true" ondragstart="drag(event)" width="336" height="69" />
+                                <img id="drag9" src="http://images.visitcanberra.com.au/images/canberra_hero_image.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69" />
+                                <div id="dragtext" style="border:1px dashed black;" draggable="true" ondragstart="drag(event)">
+                                    <p style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#666; "> Once the HTML page is created then, you can use the mass email function to send the newsletter to your contacts. The number of users who have read the newsletter and the number of times these users have read the newsletter can also be tracked from the Activity History related list under the contact. </p>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:facet>
+                    </apex:actionstatus>
+                </apex:outputPanel>
+            </div>
+            <div id="newslettr">
+                <table width="550" border="0" align="center" cellpadding="0" cellspacing="0" style="padding:20px;background:#ccc;">
+                    <tr>
+                        <td>
+                            <table width="510" border="0" align="center" cellpadding="0" cellspacing="0" style="background:#e5e5e5">
+                                <tr>
+                                    <td height="5" colspan="4" bgcolor="#aaa">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="21" height="93" style="background:#fff">&nbsp;</td>
+                                    <td width="270" valign="bottom" style="background:#fff;padding-left:20px;"> <img src="http://suyati.com/suyati/wp-content/uploads/2013/11/logo-new.png" alt="logo" width="139" height="77" />
+                                    </td>
+                                    <td width="199" valign="bottom" style="background:#fff">
+                                        <p style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#333; text-align:right; margin:0; padding-right:20px;">NOVEMBER 2014</p>
+                                    </td>
+                                    <td width="20" style="background:#fff">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="background:#fff">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="170">&nbsp;</td>
+                                    <td style="padding:20px">
+                                        <table width="230" border="0" align="center" cellpadding="0" cellspacing="0" style="background:#fff; padding:10px 30px 20px">
+                                            <tr>
+                                                <td>
+                                                    <h1 style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:18px; color:#333">Title Here</h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#666; text-align:justify"> Once the HTML page is created then, you can use the mass email function to send the newsletter to your contacts. The number of users who have read the newsletter and the number of times these users have read the newsletter can also be tracked from the Activity History related list under the contact. </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="padding:20px">
+                                        <table width="230" border="0" align="center" cellpadding="0" cellspacing="0" style="background:#fff; padding:10px 30px 20px">
+                                            <tr>
+                                                <td>
+
+                                                    <h1 style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:18px; color:#333">Title Here</h1>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div id="divtext" ondrop="drop(event)" style="border:1px dashed white; width:200px; height:170px; font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#666; text-align:justify" ondragover="allowDrop(event)">
+                                                        <p style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#666; text-align:justify"></p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="170">&nbsp;</td>
+                                    <td style="padding:20px">
+                                        <table width="230" border="0" align="center" cellpadding="0" cellspacing="0" style="background:#fff; padding:10px 30px 20px">
+                                            <tr>
+                                                <td>
+                                                    <h1 style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:18px; color:#333">Title Here</h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#666; text-align:justify"> Once the HTML page is created then, you can use the mass email function to send the newsletter to your contacts. The number of users who have read the newsletter and the number of times these users have read the newsletter can also be tracked from the Activity History related list under the contact. </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="padding:20px">
+                                        <table width="230" border="0" align="center" cellpadding="0" cellspacing="0" style="background:#fff; padding:10px 30px 20px">
+                                            <tr>
+                                                <td>
+                                                    <h1 style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:18px; color:#333">Title Here</h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#666; text-align:justify"> Once the HTML page is created then, you can use the mass email function to send the newsletter to your contacts. The number of users who have read the newsletter and the number of times these users have read the newsletter can also be tracked from the Activity History related list under the contact. </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="background:#fff">&nbsp;</td>
+                                    <td style="background:#fff">
+                                        <p style="font-family:Segoe, 'Segoe UI', 'DejaVu Sans', 'Trebuchet MS', Verdana, sans-serif;font-size:11px; color:#999;  margin:0; padding-left:20px;"> &copy; Copyright 2014 Suyati Technologies.</p>
+                                    </td>
+                                    <td style="text-align:right; background:#fff; padding:10px 20px"><img src="http://suyati.com/suyati/wp-content/uploads/2013/11/logo-new.png" alt="logo" width="70" height="35" />
+                                    </td>
+                                    <td style="background:#fff">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" bgcolor="#aaa">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <!-- To display Contacts -->
+            <div id="contacts">
+                <apex:outputPanel styleClass="contactsPanel">
+                    <apex:pageBlock >
+                        <apex:pageBlockTable value="{!Contacts}" var="con" id="contactsTable" styleClass="contactTable">
+                            <apex:column width="20%">
+                                <apex:inputCheckbox value="{!con.checked}" id="checked" />
+                            </apex:column>
+                            <apex:column width="80%">
+                                {!con.name}
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </apex:outputPanel>
+
+                <apex:commandButton value="Send NewsLetter" action="{!sendNewsLetter}" />
+                <input type="button" id="saveButton" value="Save" onclick="getRemoteAccount();" />
+                <apex:pagemessages />
+            </div>
+        </div>
+
+        <br/>
+        <br/>
+
+
+
+
+    </apex:form>
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function getRemoteAccount() {
+            alert("gfjf");
+            var accountName = (jQuery('#newslettr').html().trim());
+            alert(accountName);
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.sendLetter.getAccount}',
+                accountName,
+                function(result, event) {
+                    if (event.status) {}
+                }, {
+                    escape: true
+                }
+            );
+        }
+
+        function getQueryString(key, completeURL) {
+            var temp = completeURL.match(new RegExp(key + "=(.*?)($|\&)", "i"));
+            if (!temp)
+                return;
+            return temp[1];
+        }
+
+
+        function callSendEmail() {
+                debugger;
+                var div1 = (jQuery('#div1').html().trim());
+                var subject = jQuery('#subject').val();
+                var id1 = getQueryString('id', window.location.href);
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.sendEmail.send}',
+                    //document.getElementById('div1').innerHTML,document.getElementById('subject').val(),
+                    div1, subject, id1,
+                    function(result, event) {
+                        if (result != 'success') {
+                            alert('Data not Send');
+                        }
+                    }, {
+                        escape: true
+                    }
+                );
+            }
+            //This code dint work due to cors
+            /*function callpostchatter(){
+                   var $;
+ 
+                    $ = jQuery;
+                   $.ajax({
+                       type: "POST",
+                       // for community pages, use whole community url including path, e.g. 
+                       // https://logan.blitz01.t.force.com/customers/services/proxy.
+                       url: "/services/data/v32.0/chatter/feed-elements", 
+                       contentType: 'application/json',
+                       dataType: "json",
+                       cache: false,
+                        headers : { 'Authorization' : 'Bearer {!$Api.Session_ID}' },
+                        data :{ 
+              body : {
+                 messageSegments : [
+                    {
+                       type : "Text",
+                       text : "SOCXOOOOOOOOOO"
+                    },
+                    {   
+                       type : "Mention",
+                       id : "005C0000006xJG3"
+                    }]
+                     },
+              feedElementType : "FeedItem",
+              subjectId : "0TOC0000000LRJy"
+                             },
+                       success : function(response) {
+                                     alert("result" + response);
+                              },
+                       error : function(response) {
+                                     alert("Failed" + response);
+                              }                 
+                       
+
+                              
+ 
+                   }); 
+                   } */
+
+        //Trying a workaround. The below workaround dint work due to CORS.
+        function callpostchatter() {
+
+            var credential = ' OAuth ' + '{!GETSESSIONID()}'; // native VF function
+            var apiUrl = "https://na8.salesforce.com/services/data/v32.0/chatter/feed-elements";
+            var PATH = 'services/data/v26.0/chatter/users/me';
+            $.ajax({
+                cache: false,
+                url: '/services/proxy',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('SalesforceProxy-Endpoint', '{!SERVER_URL}' + PATH);
+                    xhr.setRequestHeader('Authorization', 'OAuth ' + '{!SESSION_ID}');
+                },
+                type: "POST",
+                contentType: 'application/json',
+                data: {
+                    body: {
+                        messageSegments: [{
+                            type: "Text",
+                            text: "SOCXOOOOOOOOOO"
+                        }, {
+                            type: "Mention",
+                            id: "005C0000006xJG3"
+                        }]
+                    },
+                    feedElementType: "FeedItem",
+                    subjectId: "0TOC0000000LRJy"
+                },
+
+                success: function(data, status, xhr) {
+                    $('body').html('Done!  You are <b>' + data.name + '</b>, and I, this humble page, retrieved your name from the REST API.');
+                },
+                error: function(xhr, status, errorThrown) {
+                    $('body').html('Oh no!  Got this error: <br/><b style="color:red">' + xhr.status + ' ' + errorThrown + ' ' + xhr.responseText + '</b>');
+                }
+            });
+
+
+            //failed
+            /* $.ajax({
+            type: "POST",
+            // for community pages, use whole community url including path, e.g. 
+            // https://logan.blitz01.t.force.com/customers/services/proxy.
+            url: "https://c.na8.visual.force.com/services/proxy", 
+            contentType: 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST",
+            cache: false,
+                         data :{ 
+   body : {
+      messageSegments : [
+         {
+            type : "Text",
+            text : "SOCXOOOOOOOOOO"
+         },
+         {   
+            type : "Mention",
+            id : "005C0000006xJG3"
+         }]
+          },
+   feedElementType : "FeedItem",
+   subjectId : "0TOC0000000LRJy"
+                  },
+            success : function(response) {
+                          alert("result" + response);
+                   },
+            error : function(response) {
+                          alert("Failed" + response);
+                   },                 
+            dataType: "json",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('SalesforceProxy-Endpoint', apiUrl);
+                xhr.setRequestHeader("Authorization", credential);
+                xhr.setRequestHeader('X-User-Agent', 'MyClient');
+            }
+                   
+ 
+        });*/
+        }
+
+        //Reference : https://gist.github.com/henriquez/3146782
+        //Reference : https://gist.github.com/richardvanhook/4677449
+        //http://salesforce.stackexchange.com/questions/55408/chatter-api-error-code-403-origin-not-whitelisted/55437#55437
+    </script>
+
+</apex:page>

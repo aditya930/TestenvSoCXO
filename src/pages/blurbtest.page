@@ -1,0 +1,109 @@
+<apex:page >
+    <apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/BlurbStyles.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/socxo.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/font-awesome.css')}" />
+
+<style type="text/css">
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+</style>    
+    <li class="clearfix newline">
+        <div class="Grid-Content">
+            <div class="Scxo-Channel-Header">
+                    <i class="fa fa-rss"></i>
+                
+                    <h6 class="blurb-src">Web Link</h6>
+
+            </div>
+            <div class="imageSocialHolder">
+                <div class="imageHolder">
+                    <div class="Scxo-Link-Hover">
+                        <a href="https://www.linkedin.com/today/post/article/20141124185039-5144591-4-types-of-workaholics-which-one-are-you" target="_blank" class="blurb-ext-link">
+                            <i class="fa fa-2x fa-link"></i>
+                            <div class="clearfix">click to read more</div>
+                        </a>
+                    </div>
+                        <img src="http://m.c.lnkd.licdn.com/mpr/mpr/p/8/005/09e/0c9/02dcb0f.jpg"> </img>
+                </div>
+                <div class="social-holder">
+                        <div class="btn-group">
+                            <a class="btn btn-info dropdown-toggle" id="600571linkedinButton" data-toggle="dropdown" href="#">
+                                <i class="fa fa-linkedin"></i>
+                                <span class="label" style="display: none;">
+
+                                    
+
+
+                                </span>
+                                    <span class="caret"></span>
+                            </a>
+                                <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="1024" blurbid="600571" provider="linkedin"><li><a>POST NOW</a></li><li class="divider"></li><li style="display: none;" class="removeSchedule"><a>UNSCHEDULE</a></li><li style="display: none;" class="divider removeSchedule"></li><li class="label-align text-center">POST TODAY AT</li><li><a>1:00 PM</a></li><li><a>2:00 PM</a></li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn btn-info dropdown-toggle" id="600571facebookButton" data-toggle="dropdown" href="#">
+                                <i class="fa fa-facebook"></i>
+                                <span class="label" style="display: none;">
+
+                                    
+
+
+                                </span>
+                                    <span class="caret"></span>
+                            </a>
+                                <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="1024" blurbid="600571" provider="facebook"><li><a>POST NOW</a></li><li class="divider"></li><li style="display: none;" class="removeSchedule"><a>UNSCHEDULE</a></li><li style="display: none;" class="divider removeSchedule"></li><li class="label-align text-center">POST TODAY AT</li><li><a>1:00 PM</a></li><li><a>2:00 PM</a></li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn btn-info dropdown-toggle" id="600571twitterButton" data-toggle="dropdown" href="#">
+                                <i class="fa fa-twitter"></i>
+                                <span class="label" style="display: none;">
+
+                                    
+
+
+                                </span>
+                                    <span class="caret"></span>
+                            </a>
+                                <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="1024" blurbid="600571" provider="twitter"><li><a>POST NOW</a></li><li class="divider"></li><li style="display: none;" class="removeSchedule"><a>UNSCHEDULE</a></li><li style="display: none;" class="divider removeSchedule"></li><li class="label-align text-center">POST TODAY AT</li><li><a>1:00 PM</a></li><li><a>2:00 PM</a></li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                        </div>
+                </div>
+            </div>
+            <div class="blurbContentTour clearfix">
+
+
+
+                <div class="col-xs-12 ContentEditor">
+                    <div class="row">
+                        <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 600571,1024); " originaltext="4 Types of Workaholics: Which One Are You?" id="title_600571">4 Types of Workaholics: Which One Are You?</textarea>
+                        <span class="label label-success ticket-label remain-chara"></span>
+                    </div>
+                    <i class="fa fa-pencil-square"></i>
+                </div>
+
+                <div class="col-xs-12 clearfix ContentEditor">
+                    <div class="row">
+                        <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 600571,1024); " originaltext="How many people do you know who are afflicted with workaholism? You might even recognized yourself in one of the 4 types our research has uncovered.First, let’s sort out a little confusion. Often">How many people do you know who are afflicted with workaholism? You might even recognized yourself in one of the 4 types our resea....</textarea>
+                        <span class="label label-success ticket-label remain-chara"></span>
+                    </div>
+                    <i class="fa fa-pencil-square"></i>
+                </div>
+
+                <div class="col-xs-12 clearfix ContentEditor">
+                    <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_600571" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                    <span class="label label-success ticket-label remain-chara-user"></span>
+                </div>
+
+            </div>
+            <br> </br>
+            <h6 class="blurb-src" title="Leadership"><i class="fa fa-lg fa-globe"></i>&nbsp;Leadership</h6>
+
+        </div>
+    </li>
+</apex:page>

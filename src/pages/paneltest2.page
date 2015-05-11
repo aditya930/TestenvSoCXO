@@ -1,0 +1,20 @@
+<apex:page controller="AuthControllerforproductrefined1">
+
+<script src="/support/api/30.0/interaction.js"></script>
+<script src="/soap/ajax/30.0/connection.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+<script>
+
+jQuery(window).load(function(){
+  alert("pageload event fired!");
+        });
+
+</script>
+
+
+
+
+</apex:page>

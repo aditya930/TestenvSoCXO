@@ -1,0 +1,1336 @@
+<apex:page showHeader="false" sidebar="false">
+
+        <!-- Open Sans font from Google CDN -->
+        <link href="./Private_files/css" rel="stylesheet" type="text/css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"/>
+         <apex:stylesheet value="{!$Resource.socxostyle}" />
+         <apex:stylesheet value="{!$Resource.socxostyle2}"/>
+         <apex:includeScript value="{!$Resource.pixeladmin}"/>
+         <apex:includeScript value="{!$Resource.socxoweb}"/> 
+
+       
+        <link href="https://freetest.socxo.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+
+        <link href="https://freetest.socxo.com/Content/PixelAdmin?v=UxhG1c64XlEBAPHlwFMSzQt8VDi_cuCLqi8MwFaO10s1" rel="stylesheet"/>
+       
+        <link href="https://freetest.socxo.com/Content/sitesupport?v=pHZ20hGOJlXbn8RioQsz_MVG3vfSFr6uKgsDNVWaUMo1" rel="stylesheet"/>
+
+
+        <script src="http://freetest.socxo.com/bundles/pixeladmin?v=6edNafZoy_meMwL9VGQ4eL3W7djBlKkvfXD2iGX97-Q1"></script>
+        <script src="http://freetest.socxo.com/bundles/SoCXOWeb?v=mU0FYh1hY76KDeDDAowqb0paUDj8sOC4gyhq4Kp3mdY1"></script> 
+        <script src="http://freetest.socxo.com/bundles/jquery?v=yMmPM1TxecYcoWtCWW3jYgH0fr9kiAasOfb-W5I001A1"></script>
+
+
+    <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style>
+    <body class="theme-default  main-navbar-fixed mmc-dropdown-open-ul main-menu-fixed dont-animate-mm-content-sm animate-mm-md animate-mm-lg">
+        <script> var init = []; </script>
+        <div id="main-wrapper">
+
+            <!-- Page loading  -->
+            <div id="pageLoader" style="display: none;">
+                <i class="prealoder"></i>
+            </div>
+
+            <header>
+    <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+        <!-- Main menu toggle -->
+        <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+
+        <div class="navbar-inner">
+            <!-- Main navbar header -->
+            <div class="navbar-header">
+
+                <!-- Logo -->
+                <a href="http://freetest.socxo.com/" class="navbar-brand">
+                    <img id="logo" name="logo" src="./Private_files/logo.png" alt="freetest"/>
+                </a>
+
+                <ul class="mob-nav nav navbar-nav hidden-lg hidden-md hidden-sm pull-right">
+                    <li class="CompanyTab active">
+                        <a href="./Private_files/Private.html"><i class="fa fa-file-text-o pull-left"></i><span class="hidden-xs">freetest.com Blurbs</span></a>
+                    </li>
+                    <li class="PersonalTab">
+                        <a href="http://freetest.socxo.com/Blurb/Personal" onclick=" return Personal(); "><i class="fa fa-rss pull-left"></i><span class="hidden-xs">Personal Blurbs</span></a>
+                    </li>
+                </ul>
+                <!-- Main navbar toggle -->
+                <button type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+            </div>
+            <!-- / .navbar-header -->
+            <div class=" hidden-lg hidden-md hidden-sm">
+                <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+
+                    <ul class="nav navbar-nav right-navbar-nav dropdown">
+
+                        <li>
+                            <a href="http://freetest.socxo.com/Dashboard/Index">Dashboard</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="http://freetest.socxo.com/User/ManageFeeds">Manage Feeds</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="http://freetest.socxo.com/Account/Details">My Profile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="http://freetest.socxo.com/Dashboard/UserRewards">Rewards And Redemptions</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="http://freetest.socxo.com/Account/ChangePassword">Change Password</a></li>
+    <li class="divider"></li>
+    <li>
+<a href="http://freetest.socxo.com/Account/SwitchToAdmin">Switch to Admin Head</a>    </li>
+
+    <li class="divider"></li>
+    <li>
+        <a href="http://freetest.socxo.com/User/FAQ">FAQ</a>
+    </li>
+
+                        <li class="divider"></li>
+                        <li><a href="http://freetest.socxo.com/Account/Logoff"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <div class="collapse navbar-collapse main-navbar-collapse hidden-xs">
+                <!-- / .navbar-nav -->
+                <div class="pull-right clearfix">
+                    <ul class="nav navbar-nav hidden-xs">
+                        <li class="CompanyTab active">
+                            <a href="./Private_files/Private.html"><i class="fa fa-file-text-o"></i><span class="">freetest.com Blurbs</span></a>
+                        </li>
+                        <li class="PersonalTab">
+                            <a href="http://freetest.socxo.com/Blurb/Personal" onclick=" return Personal(); "><i class="fa fa-rss"></i><span class="">Personal Blurbs</span></a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav pull-right right-navbar-nav">
+                        <li class="dropdown">
+                            <a href="http://freetest.socxo.com/Blurb/Private#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                <span class="header-profile-image img-circle"><img src="" alt=""/></span>
+                                <span>freetest (Advocates)</span>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a href="http://freetest.socxo.com/Dashboard/Index">Dashboard</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="http://freetest.socxo.com/User/ManageFeeds">Manage Feeds</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="http://freetest.socxo.com/Account/Details">My Profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="http://freetest.socxo.com/Dashboard/UserRewards">Rewards And Redemptions</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="http://freetest.socxo.com/Account/ChangePassword">Change Password</a></li>
+    <li class="divider"></li>
+    <li>
+<a href="http://freetest.socxo.com/Account/SwitchToAdmin">Switch to Admin Head</a>    </li>
+
+    <li class="divider"></li>
+    <li>
+        <a href="http://freetest.socxo.com/User/FAQ">FAQ</a>
+    </li>
+
+                                <li class="divider"></li>
+                                <li><a href="http://freetest.socxo.com/Account/Logoff"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- / .navbar-nav -->
+                </div>
+                <!-- / .right -->   
+            </div>
+
+            <!-- / #main-navbar-collapse -->
+        </div>
+        <!-- / .navbar-inner -->
+    </div>
+    <!-- / #main-navbar -->
+    <!-- /2. $END_MAIN_NAVIGATION -->
+</header>
+      
+            <div id="tilescontent-wrapper">
+                <!-- Common Info/Alert message -->
+                <div id="alertBox" class="alert alert-error posab ShowAlert " style="display: none;"><button type="button" class="close" data-dismiss="alert">×</button></div>
+                <div id="infoBox" class="alert alert-info posab ShowInfo" style="display: none;"><button type="button" class="close" data-dismiss="alert">×</button></div>
+                
+
+
+<div id="main-menu" role="navigation">
+    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div id="main-menu-inner" style="overflow: hidden; width: auto; height: 100%;">
+        <ul class="navigation" id="categoryNav">
+
+                <li id="All" class=" active">
+                    <a class="mm-text" href="./Private_files/Private.html">All</a>
+                </li>
+                        <li id="30" class="">
+                            <a class="mm-text" href="http://freetest.socxo.com/Blurb/Private?tagid=30">Suyati</a>
+                        </li>
+                        <li id="10" class="">
+                            <a class="mm-text" href="http://freetest.socxo.com/Blurb/Private?tagid=10">Technology</a>
+                        </li>
+                        <li id="36" class="">
+                            <a class="mm-text" href="http://freetest.socxo.com/Blurb/Private?tagid=36">test</a>
+                        </li>
+
+
+        </ul>
+    </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 564px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="ScXo-aggrigate-page">
+            <div class="ScXo-Curate-container clearfix">
+                <div class="row">
+                    <ul id="tiles" class="ScXo-Curate-feed-content">
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa internal-feed"></i>
+                    
+                        <h6 class="blurb-src" title="The Hindu - International">&nbsp;The Hindu - International</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.thehindu.com/news/international/suspected-racist-attack-sikh-man-assaulted-in-birmingham/article7055162.ece?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                            <img src="./Private_files/oghindunew1.jpg" alt=""/>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4269linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4269facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4269twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="89" blurbid="4269" provider="twitter"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 4269 ,89); " originaltext="Suspected racist attack: Sikh man assaulted in Birmingham" id="title_4269">Suspected racist attack: Sikh man assaulted in Birmingham </textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 4269 ,89); " originaltext="
+Police have launched an investigation after video of the assault emerged on the net
+
+">Police have launched an investigation after video of the assault emerged on the net
+
+</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_4269" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+            </div>
+        </li>
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa internal-feed"></i>
+                    
+                        <h6 class="blurb-src" title="The Hindu - International">&nbsp;The Hindu - International</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.thehindu.com/news/international/iran-nuclear-talks-push-past-deadline/article7055168.ece?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                            <img src="./Private_files/IRAN-NUCLEAR__2359391c.jpg" alt=""/>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4270linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="88" blurbid="4270" provider="linkedin"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4270facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="88" blurbid="4270" provider="facebook"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4270twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="88" blurbid="4270" provider="twitter"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 4270 ,88); " originaltext="Iran nuclear talks push past deadline" id="title_4270">Iran nuclear talks push past deadline</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 4270 ,88); " originaltext="
+An Iranian negotiator said his team could stay &amp;quot;as long as necessary&amp;quot; to clear the remaining hurdles. 
+">An Iranian negotiator said his team could stay "as long as necessary" to clear the remaining hurdles. 
+</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_4270" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+            </div>
+        </li>
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa internal-feed"></i>
+                    
+                        <h6 class="blurb-src" title="The Hindu - International">&nbsp;The Hindu - International</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.thehindu.com/news/international/malaysia-royal-pardon-denial-anwar-ibrahim-sodomy-charges/article7056460.ece?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                            <img src="./Private_files/anwar_ibrahim_with_2306069c.jpg" alt=""/>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4272linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="87" blurbid="4272" provider="linkedin"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4272facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="87" blurbid="4272" provider="facebook"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4272twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="87" blurbid="4272" provider="twitter"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 4272 ,87); " originaltext="Malaysia denies pardon for Anwar Ibrahim" id="title_4272">Malaysia denies pardon for Anwar Ibrahim</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 4272 ,87); " originaltext="
+Malaysia has rejected a petition seeking a royal pardon for jailed opposition leader Anwar Ibrahim, who is serving a five-year prison term for sodomy.
+
+">Malaysia has rejected a petition seeking a royal pardon for jailed opposition leader Anwar Ibrahim, who is serving a five-year...</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_4272" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+            </div>
+        </li>
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa internal-feed"></i>
+                    
+                        <h6 class="blurb-src" title="The Hindu - International">&nbsp;The Hindu - International</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.thehindu.com/news/international/world/bali-nine-myuran-sukumaran-andrew-chan-indonesia-death-sentence/article7056533.ece?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                            <img src="./Private_files/_lawyer_2359656c.jpg" alt=""/>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4273linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="86" blurbid="4273" provider="linkedin"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4273facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="86" blurbid="4273" provider="facebook"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4273twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="86" blurbid="4273" provider="twitter"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 4273 ,86); " originaltext="Indonesian court to decide on Bali Nine execution appeal on April 6" id="title_4273">Indonesian court to decide on Bali Nine execution appeal on April 6</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 4273 ,86); " originaltext="
+An Indonesian court hearing the appeals of two Australian death row convicts will announce a verdict on April 6, one of the judges determining the case said on Wednesday.Myuran Sukumaran an...
+
+">An Indonesian court hearing the appeals of two Australian death row convicts will announce a verdict on April 6, one of the ju...</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_4273" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+            </div>
+        </li>
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa internal-feed"></i>
+                    
+                        <h6 class="blurb-src" title="The Hindu - International">&nbsp;The Hindu - International</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.thehindu.com/news/international/turkey-hostage-drama-prosecutor-dies-of-wounds/article7055172.ece?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                            <img src="./Private_files/TURKEY-HOSTAGE__2359393c.jpg" alt=""/>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4271linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="85" blurbid="4271" provider="linkedin"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4271facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="85" blurbid="4271" provider="facebook"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4271twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="85" blurbid="4271" provider="twitter"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 4271 ,85); " originaltext="Turkey hostage drama: Prosecutor dies of wounds " id="title_4271">Turkey hostage drama: Prosecutor dies of wounds </textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 4271 ,85); " originaltext="
+Police chief says two captors killed in shootout at an Istanbul courthouse 
+">Police chief says two captors killed in shootout at an Istanbul courthouse 
+</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_4271" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+            </div>
+        </li>
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa internal-feed"></i>
+                    
+                        <h6 class="blurb-src">&nbsp;Web Link</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.ipl.com/" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4256linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4256facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="4256twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: none;">
+
+                                        
+
+
+                                    </span>
+                                        <span class="caret"></span>
+                                </a>
+                                    <ul class="dropdown-menu blurbpublishlist pull-right" style="cursor: default;" enterpriseblurbid="77" blurbid="4256" provider="twitter"><li><a>POST NOW</a></li><li class="divider"></li><li class="removeSchedule" style="display: none;"><a>UNSCHEDULE</a></li><li class="divider removeSchedule" style="display: none;"></li><li class="label-align text-center">POST TODAY AT</li><li><a>3:00 PM</a></li><li><a>4:00 PM</a></li><li><a>5:00 PM</a></li><li><a>6:00 PM</a></li><li><a>7:00 PM</a></li><li><a>8:00 PM</a></li><li><a>9:00 PM</a></li><li><a>10:00 PM</a></li><li><a>11:00 PM</a></li></ul>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 4256 ,77); " originaltext="Did you want IPL or the Indian Premier League?" id="title_4256">Did you want IPL or the Indian Premier League?</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 4256 ,77); " originaltext=""></textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="" onkeyup=" return WordCount(event, this, 600); " id="message_4256" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) ">fdfsfsdfs sdfsdfsdfsdfd sdfsdfsdfsd sdfsdfsdfsdfsdf sdfsdfsdfsdf sdfsdfsdfsd sfsdfsdfsd sfsdfsdfsd sdfsdfsdfsdf sdfsdfsdfsd dsfdfd</textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="test"><i class="fa fa-lg fa-globe"></i>&nbsp;test</h6>
+
+            </div>
+        </li>
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa fa-rss"></i>
+                    
+                        <h6 class="blurb-src" title="Engadget RSS Feed">&nbsp;Engadget RSS Feed</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.engadget.com/2015/03/04/hyundai-blue-link-app-smartwatch/?ncid=rss_truncated" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="1299linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="1299facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="1299twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 1299 ,65); " originaltext="Hyundai lets owners control their cars with smartwatchesiuyiuiououi" id="title_1299">Hyundai lets owners control their cars with smartwatchesiuyiuiououi</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 1299 ,65); " originaltext="Hey, Hyundai owners, it&#39;s finally here: the Blue Link companion app for smartwatches that the automaker promised back during CE...">Hey, Hyundai owners, it's finally here: the Blue Link companion app for smartwatches that the automaker promised back during CE...</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="Add your Facebook/LinkedIn comment" onkeyup=" return WordCount(event, this, 600); " id="message_1299" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) "></textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+            </div>
+        </li>
+        <li class="clearfix newline">
+            <div class="Grid-Content">
+                <div class="Scxo-Channel-Header">
+                        <i class="fa fa-rss"></i>
+                    
+                        <h6 class="blurb-src" title="WSJ.com Technology">&nbsp;WSJ.com Technology</h6>
+
+                </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="http://www.wsj.com/articles/resorts-promise-families-the-perfect-getawayfrom-electronics-1425495842?mod=rss_Technology" target="_blank" class="blurb-ext-link">
+                                <i class="fa fa-2x fa-link"></i>
+                                <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social-holder">
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="1329linkedinButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-linkedin"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="1329facebookButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-info dropdown-toggle" id="1329twitterButton" data-toggle="dropdown" href="http://freetest.socxo.com/Blurb/Private#">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="label" style="display: block;">
+
+                                        POSTED
+
+
+                                    </span>
+                                </a>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="blurbContentTour clearfix">
+
+
+
+                        <div class="col-xs-12 ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-head User-blurb" maxlength="100" onkeyup=" return WordCount(event, this, 100); " onblur="saveTitle(this, 1329 ,64); " originaltext="Parents Dream of the Perfect Getaway---From Electronics" id="title_1329">Parents Dream of the Perfect Getaway---From Electronics</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                        <div class="col-xs-12 clearfix ContentEditor">
+                            <div class="row">
+                                <textarea class="blurb-content User-blurb" maxlength="130" onkeyup=" return WordCount(event, this, 130); " onblur="saveText(this, 1329 ,64); " originaltext="Increasingly frustrated with how much time their children spend fin front of computer and mggfddfgfdgdfgdfobile scregengs, more pa">Increasingly frustrated with how much time their children spend fin front of computer and mggfddfgfdgdfgdfobile scregengs, more pa</textarea>
+                                <span class="label label-success ticket-label remain-chara"></span>
+                            </div>
+                            <i class="fa fa-pencil-square"></i>
+                        </div>
+                    <div class="col-xs-12 clearfix ContentEditor">
+                        <textarea data-placeholder="" onkeyup=" return WordCount(event, this, 600); " id="message_1329" class="col-xs-12 Scxo-Curation-Comment-Box" maxlength="600" onblur=" clearWordCount(this) ">fds fsf sfsf fsfs fs fds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs fsfds fsf sfsf fsfs f</textarea>
+                        <span class="label label-success ticket-label remain-chara-user"></span>
+                    </div>
+
+                </div>
+                <br/>
+                <h6 class="blurb-src" title="Technology"><i class="fa fa-lg fa-globe"></i>&nbsp;Technology</h6>
+
+            </div>
+        </li>
+</ul>
+                </div>
+            </div>
+            <div id="dynamicloader" class="text-center" style="display: none;">
+                <img src="./Private_files/loader.GIF"/>
+                <span class="clearfix">Getting the latest blurbs</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="showDigestModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelCategory" aria-hidden="true">
+    <div class="modal-dialog DigestMailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" style="color: #f8f8f8">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <ul id="digestTile" class="ScXo-Curate-feed-content clearfix"></ul>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+            </div><!-- / #content-wrapper -->
+            <div id="main-menu-bg"></div>
+        </div><!-- / #main-wrapper -->
+       <!-- <script src="./Private_files/jquery"></script>
+
+        <script src="./Private_files/pixeladmin"></script>
+
+        <script src="./Private_files/SoCXOWeb"></script> -->
+
+
+        <script type="text/javascript">
+            init.push(function() {
+                // Javascript code here
+            });
+            window.PixelAdmin.start(init, { main_menu: { store_state: false } });
+
+        </script>
+
+        
+
+    <script src="./Private_files/Schedule"></script>
+
+
+    <script type="text/javascript">
+
+        var page = 1;
+        var isLoading = false;
+
+        $(document).ready(function () {
+            $('[class=PersonalTab]').removeClass('active');
+            $('[class=CompanyTab]').addClass('active');
+            $('#dynamicloader').show();
+
+            LoadBlurbs('', page);
+            //For Showing Digest blurb 
+            // TempData.Peek used because we need that data in _private action 
+            if ('' != null && '' != '') {
+                LoadDigestBlurb('');
+
+            }
+            // Capture scroll event.
+            $(document).bind('scroll', onScroll);
+
+
+        });
+        function LoadBlurbs(categoryId, page) {
+            isLoading = true;
+            $('#dynamicloader').show();
+
+            $.ajax({
+                url: '/Blurb/_Private',
+                type: 'GET',
+                data: {
+                    page: page,
+                    categoryId: categoryId
+                },
+                success: function (data) {
+                    $('#tiles').show();
+                    isLoading = false;
+                    $('#tiles').append(data);
+                    RenderTimeOptions();
+                    if ($('#tiles').find("li").length == 0) {
+
+                        AlertMessage("Yikes! Your admin is yet to share content with you. While s/he is at it, check out your Personal Blurbs.");
+                        $('#dynamicloader').hide();
+                    }
+                    $('#dynamicloader').hide();
+                }
+            });
+        }
+        function onScroll(event) {
+            // Load blurbs only if one fetch is complete
+            if (!isLoading) {
+                // Check if we're within 100 pixels of the bottom edge of the broser window.
+                var closeToBottom = ($(window).scrollTop() + $(window).height() > $(document).height() - 250);
+                if (closeToBottom) {
+                    page++;
+                    LoadBlurbs('', page);
+                }
+            }
+        }
+
+        function Publish(blurbId, enterpriseBlurbId, providerName, epochTime) {
+            /*Function to post and schedule blurbs.
+            Accepts blurbId, providerName = twitter/linkedIn, epochTime in milliseconds
+            If epochTime =0 then the blurb is immediately posted.
+            element refers to the dropdown button*/
+
+            var element = $('[id=' + blurbId + providerName + 'Button]');
+
+            if (epochTime == 0) {
+                element.children('.fa').addClass('fa-spin');
+                Post(blurbId, enterpriseBlurbId, providerName);
+
+            } else if (epochTime == -1) {
+                element.children('.fa').addClass('fa-spin');
+                RemoveSchedule(blurbId, enterpriseBlurbId, providerName);
+            } else {
+                element.children('.fa').addClass('fa-spin');
+                Schedule(blurbId, enterpriseBlurbId, providerName, epochTime);
+            }
+        }
+
+        function Post(blurbId, enterpriseBlurbId, provider) {
+            var title = $("#title_" + blurbId).attr('originaltext');
+            var message = $("#message_" + blurbId).val().trim();
+            $('#loader').show();
+            $.ajax({
+                url: '/Blurb/Post',
+                type: 'GET',
+                data: {
+                    'blurbId': blurbId,
+                    'provider': provider,
+                    'userComment': message,
+                    'enterpriseBlurbId': enterpriseBlurbId,
+                    'title': title
+                },
+                success: function (result) {
+                    var element = $('[id=' + blurbId + provider + 'Button]');
+                    $('#loader').hide();
+                    if (result.Data == 'Success') {
+                        // InfoMessage("Blurb has been successfully shared to " + provider);
+                        element.children('.fa').removeClass('fa-spin');
+                        element.children('.caret').remove();
+                        element.children('.label').html('POSTED').show();
+                        element.siblings('.blurbpublishlist').remove();
+
+                    } else if (result.Data == 'Not Connected') {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "Your " + provider + " account is not connected.Please  <a href='/Account/Details' class='btn btn-success'>Connect</a>", duration: 4000 });
+
+                    }
+                    else if (result.Data == 'apperrormessage') {
+
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "There is an unexpected error in posting the Blurb to  " + result.message + ".Please contact your administrator", duration: 4000 });
+                    }
+                    else if (result.Data == 'Posted') {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "You have already posted this Blurb. Edit the title and try again.", duration: 4000 });
+                    }
+                    else if (result.Data == 'Share Expired') {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ title: "Oops!!", message: "Please contact administrator to make more shares.", duration: 4000 });
+                    }
+                    else if (result.Data == 'UnPblished') {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "Blurb no longer available. Please refresh page to continue.", duration: 4000 });
+
+                    }
+                    else {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "Currently Unable to Post the Blurb", duration: 4000 });
+                    }
+                },
+                error: function (result) {
+                    var element = $('[id=' + blurbId + provider + 'Button]');
+                    element.children('.fa').removeClass('fa-spin');
+                    console.log(result.responseText);
+                }
+            });
+        }
+
+        function Schedule(blurbId, enterpriseBlurbId, provider, time) {
+            var title = $("#title_" + blurbId).attr('originaltext');
+            var comment = $("#message_" + blurbId).val().trim();
+            $.ajax({
+                url: '/Blurb/Schedule',
+                type: 'GET',
+                data: {
+                    'blurbId': blurbId,
+                    'time': time,
+                    'provider': provider,
+                    'comment': comment,
+                    'enterpriseBlurbId': enterpriseBlurbId,
+                    'title': title
+                },
+                success: function (result) {
+                    var element = $('[id=' + blurbId + provider + 'Button]');
+
+                    if (result.Data == 'Success') {
+                        element.siblings().children('.removeSchedule').show();
+                        element.children('.fa').removeClass('fa-spin');
+                        element.children('.label').html(time).show();
+                    } else if (result.Data == 'Not Connected') {
+
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "Your " + provider + " account is not connected.Please <a href='/Account/Details' class='btn btn-success'>Connect</a>", duration: 4000 });
+                    }
+                    else if (result.Data == 'apperrormessage') {
+
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "There is an unexpected error in scheduling the Blurb to " + result.message + ".Please contact your administrator", duration: 4000 });
+                    }
+                    else if (result.Data == 'Posted') {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "You have already posted this Blurb. Edit the title and try again.", duration: 4000 });
+                    }
+                    else if (result.Data == 'UnPblished') {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: "Blurb no longer available. Please refresh page to continue.", duration: 4000 });
+
+                    }
+                    else {
+                        element.children('.fa').removeClass('fa-spin');
+                        $.growl.error({ message: result.message, duration: 4000 });
+                    }
+                },
+                error: function (result) {
+                    element.children('.fa').removeClass('fa-spin');
+                    console.log(result.responseText);
+                }
+            });
+        }
+
+        function RemoveSchedule(blurbId, enterpriseBlurbId, provider) {
+            $('#loader').show();
+            var removeScheduleUrl = $('#removeScheduleUrl').val();
+            $.ajax({
+                url: '/Blurb/UnSchedule',
+                type: 'GET',
+                datatype: 'json',
+                cache: false,
+                data: {
+                    'blurbId': blurbId,
+                    'provider': provider,
+                    'enterpriseBlurbId': enterpriseBlurbId
+                },
+                success: function (result) {
+                    $('#loader').hide();
+                    if (result.Data == 'Success') {
+                        var element = $('[id=' + blurbId + provider + 'Button]');
+                        // Handle success jQuery actions
+                        element.children('.label').html('').hide();
+                        element.siblings().children('.removeSchedule').hide();
+                        element.children('.removeSchedule').hide();
+                        element.children('.fa').removeClass('fa-spin');
+                    }
+                    else {
+                        // Handle the error
+                    }
+                },
+                error: function (result) { $('#loader').hide(); }
+            });
+        }
+
+
+        function isBlankOrEmpty(str) {
+            return (!str || 0 === str.length || /^\s*$/.test(str));
+        }
+
+        // Save the edited title of the blurb
+        function saveTitle(e, blurbId, enterpriseBlurbId) {
+            $(e).next('span').html('');
+
+            var title = '';
+            if ($(e).val()) {
+                title = $(e).val().replace(/[<>|\n]/g, '').trim();
+            }
+            if (isBlankOrEmpty(title)) {
+                $.growl.error({ message: "Title cannot be empty",duration:4000 });
+                $(e).val(e.getAttribute("originalText"));
+            } else {
+                if (title.length > 105) {
+                    $.growl.error({ message: "Title length exceeded", duration: 4000 });
+                    $(e).val(e.getAttribute("originalText"));
+                } else {
+                    e.setAttribute("originalText", title);
+                    Edit(blurbId, enterpriseBlurbId, null, title);
+                }
+            }
+        }
+
+        // Save the edited description of the blurb
+        function saveText(e, blurbId, enterpriseBlurbId) {
+            $(e).next('span').html('');
+            var text = '';
+            if ($(e).val()) {
+                description = $(e).val().replace(/[<>|\n]/g, '').trim();
+            }
+            if (isBlankOrEmpty(description)) {
+                $.growl.error({ message: "Text cannot be empty", duration: 4000 });
+                $(e).val(e.getAttribute("originalText"));
+            } else {
+                if (description.length > 2000) {
+                    $.growl.error({ message: "Text length exceeded", duration: 4000 });
+                    $(e).val(e.getAttribute("originalText"));
+                } else {
+                    e.setAttribute("originalText", description);
+                    Edit(blurbId, enterpriseBlurbId, description, null);
+                }
+            }
+        }
+
+        function Edit(blurbId, enterpriseBlurbId, description, title) {
+            $.ajax({
+                url: '/Blurb/UpdateUserBlurb',
+                datatype: 'json',
+                data: {
+                    'blurbId': blurbId,
+                    'title': title,
+                    'description': description,
+                    'enterpriseBlurbId': enterpriseBlurbId
+                },
+                type: 'GET',
+                success: function (result) {
+                    if (result.status == 'Success') {
+                        // Handle success Event
+                        // No success message is shown now
+                    }
+                },
+                error: function (result) {
+                    console.log(result.responseText);
+                }
+            });
+        }
+
+        // Methods for Counting and Limiting user input
+        function WordCount(e, Field, maxLength) {
+            var wordLength = null;
+            if ($(Field).is("input") || $(Field).is("textarea"))
+                wordLength = $(Field).val().length;
+            else
+                wordLength = $(Field).text().length;
+
+            if (wordLength >= maxLength && e.keyCode != 46 && e.keyCode != 8) {
+                $(Field).next('span').removeClass('label-success ticket-label').addClass('label-danger ticket-label');
+            } else {
+                $(Field).next('span').removeClass('label-danger ticket-label').addClass('label-success ticket-label');
+            }
+            var pendingwords = maxLength - wordLength < 0 ? 0 : maxLength - wordLength;
+            $(Field).next('span').html(pendingwords);
+
+        }
+
+        function clearWordCount(e) {
+            $(e).next('span').html('');
+        }
+        // End Methods
+        //Showing Digest blurb in pop
+
+        function LoadDigestBlurb(enterpriseBlurbId) {
+            $.ajax({
+                url: '/Blurb/GetPrivateBlurb',
+                type: 'GET',
+                data: {
+                    enterpriseBlurbId: enterpriseBlurbId
+                },
+                success: function (data) {
+                    $('#showDigestModel').modal('show');
+                    isLoading = false;
+                    $('#digestTile').append(data);
+                    RenderTimeOptions();
+                    if ($('#digestTile').find("li").length == 0) {
+
+                        AlertMessage("No Blurbs available right now. Please contact admin for more details.");
+                        $('#dynamicloader').hide();
+                    }
+                    $('#dynamicloader').hide();
+                }
+            });
+        }
+
+
+        $('#showDigestModel').on('hide.bs.modal', function (e) {
+            window.location.href = "Private"
+        })
+
+    </script>
+
+    
+<div id="small-screen-width-point" style="position:absolute;top:-10000px;width:10px;height:10px;background:#fff;"></div><div id="tablet-screen-width-point" style="position:absolute;top:-10000px;width:10px;height:10px;background:#fff;"></div></body>
+
+</apex:page>

@@ -1,0 +1,61 @@
+<apex:page standardController="Product2" extensions="AuthControllerforproduct">
+
+<apex:form >
+
+SOCXO CREDENTIALS
+<br/><br/>
+USERname<apex:inputtext value="{!username}" label="Username"/>
+<br/><br/>
+
+passWORD<apex:inputtext value="{!password}" label="Password"/>
+<br/><br/>
+
+<apex:commandButton action="{!authorize}" value="Authorize" id="authButton" rerender="out1,out2,out3"/>
+<p/>
+
+<apex:outputLabel value="{!postbody}" id="out1"></apex:outputLabel><br/>
+<br/><br/>
+
+<apex:commandButton action="{!blurbs}" value="Get Blurbs"/>
+
+<br/><br/>
+<apex:repeat value="{!blurblist}" var="pos">
+    <a id="theLink" name="theLink" href="{!pos}">{!pos}<br/><br/>
+</a>
+    <!--<apex:outputtext value="{!pos}" /><br/>-->
+</apex:repeat>
+<br/><br/>
+
+<apex:commandButton action="{!Categories}" value="Get Categories"/>
+<br/><br/>
+<!--<apex:repeat value="{!categorylist}" var="pos1">
+<apex:outputtext value="{!pos1}" /><br/>
+</apex:repeat>-->
+
+<apex:selectList value="{!categories}" multiselect="true">
+<apex:selectOptions value="{!Items}"/>
+</apex:selectList><p/>
+<apex:commandButton value="Related Blurbs" action="{!test}" rerender="out" status="status"/>
+</apex:form>  
+
+<!--testing whether the selected category is picked up-->
+
+<apex:outputPanel id="out">
+        <apex:actionstatus id="status" startText="testing...">
+            <apex:facet name="stop">
+                <apex:outputPanel >
+                    <p>You have selected:</p>
+                    <apex:dataList value="{!categories}" var="c">{!c}</apex:dataList>
+                    <apex:repeat value="{!categorylist}" var="pos1">
+                    <a id="theLink" name="theLink1" href="{!pos1}">{!pos1}<br/><br/>
+                    </a>
+                    </apex:repeat>
+                    
+               </apex:outputPanel>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputPanel>
+
+
+
+</apex:page>

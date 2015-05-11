@@ -1,0 +1,20 @@
+<apex:page controller="SOCXOclass" sidebar="false" >
+
+
+<apex:form id="form1">
+<apex:outputPanel rendered="{!req1 || req2}">
+<apex:outputLabel rendered="{!req1}">Please provide your SOCXO login credentials to proceed further</apex:outputLabel>
+<apex:outputLabel rendered="{!req2}">Token is expired. Please login again.</apex:outputLabel>
+<br/><br/>
+SOCXO CREDENTIALS
+<br/><br/>
+USERname<apex:inputtext value="{!username}" label="Username" id="name1"/>
+<br/><br/>
+passWORD<apex:inputtext value="{!password}" label="Password" id="pass1" />
+<br/><br/>
+
+<apex:commandButton action="{!authorize}" value="Authorize" id="authButton"/>
+<p/>
+</apex:outputPanel>
+</apex:form>
+</apex:page>

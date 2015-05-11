@@ -1,0 +1,15 @@
+<apex:component controller="AuthControllerforproductrefined" access="global">
+
+<apex:repeat value="{!categoryblurbs}" var="pos1">
+                    <!--<a id="theLink" name="theLink1" href="{!pos1}">{!pos1}<br/><br/>
+                    </a>-->
+
+
+ <tr>
+            
+            <td><a href="{!pos1.link__c}">{!pos1.link__c}<br/><br/></a>
+            </td>
+                         
+ </tr>
+</apex:repeat> 
+</apex:component>

@@ -1,0 +1,66 @@
+<apex:page >
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>jQuery Example</title>
+    <script>
+      $(document).ready(function() {
+      debugger;
+        $.ajaxSetup({ cache: true });
+  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+    FB.init({
+      appId: '512090218911979',
+      version: 'v2.3' // or v2.0, v2.1, v2.0
+    });  
+    window.open("https://www.facebook.com/dialog/oauth?client_id=512090218911979 & redirect_uri="+encodeURIComponent('http://myorg.chelsea.com/Account/ExternalLoginCallback')+"&scope=read_friendlists,publish_actions,publish_stream,email&esponse_type=token") ;
+    // window.location.href    ="https://www.facebook.com/?stype=lo&jlou=AfdUQBV_5TeUjjWjEyVu6pzU4Z23IEvHeurceS2LtveVNEr6fb9uXex1xX7rP_-lGpsusMkSeHtClklpbsxrHcfIvf9f5At06YElzZOTjrzaKQ&smuh=55801&lh=Ac-JniRWhS6KLwkd";
+    FB.getLoginStatus(function(response) {
+    if (response.status == 'connected') {
+        
+    } else if (response.status === 'not_authorized') {            
+    //window.location.href  = "https://www.facebook.com/dialog/oauth?client_id=512090218911979 & redirect_uri="+encodeURIComponent('http://myorg.chelsea.com/Account/ExternalLoginCallback')+"&scope=read_friendlists,publish_actions,publish_stream,email&esponse_type=token";
+             window.location.href    ="https://www.facebook.com/?stype=lo&jlou=AfdUQBV_5TeUjjWjEyVu6pzU4Z23IEvHeurceS2LtveVNEr6fb9uXex1xX7rP_-lGpsusMkSeHtClklpbsxrHcfIvf9f5At06YElzZOTjrzaKQ&smuh=55801&lh=Ac-JniRWhS6KLwkd";
+     
+     }
+     }
+     );
+      
+    
+    
+    FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    // the user is logged in and has authenticated your
+    // app, and response.authResponse supplies
+    // the user's ID, a valid access token, a signed
+    // request, and the time the access token 
+    // and signed request each expire
+    var uid = response.authResponse.userID;
+    var accessToken = response.authResponse.accessToken;
+  } else if (response.status === 'not_authorized') {
+    // the user is logged in to Facebook, 
+    // but has not authenticated your app
+  } else {
+    // the user isn't logged in to Facebook.
+  }
+ });
+ 
+    FB.login(function(response) {
+   if (response.authResponse) {
+     var access_token =   FB.getAuthResponse()['accessToken'];
+     console.log('Access Token = '+ access_token);
+     FB.api('/me', function(response) {
+     console.log('Good to see you, ' + response.name + '.');
+     });
+   } else {
+     console.log('User cancelled login or did not fully authorize.');
+   }
+ }, {scope: ''});
+  });
+      });
+     var updateStatusCallback = function(result)
+      {
+      alert(result);
+      };
+    </script>
+    <input type= "button" id="#loginbutton"/>
+</apex:page>

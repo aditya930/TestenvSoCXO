@@ -1,0 +1,39 @@
+<apex:page docType="HTML-5.0" showheader="false" sidebar="false" controller="ajaxtest">
+    <script src="/support/api/30.0/interaction.js"></script>
+    <script src="/soap/ajax/30.0/connection.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+ <script>
+    jQuery(document).ready(function($) {
+      // Pull 10 Accounts via the REST API
+      $.ajax(
+        {
+          type: 'POST',
+          url: 'http://{!tenendpoint}/api/category/private',
+          beforeSend: function(xhr) {
+            // Set the OAuth header from the session ID
+            xhr.setRequestHeader('Authorization', 'Bearer {!accstoken}');
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("content-type", "application/json");
+          },
+          
+          success: function(response) {
+            // We got 'em - append our records to the HTML list
+            $.each(response.records, function(index, record) {
+              $('#accountList').append('<li>'+JSON.stringify(record)+'</li>');
+            });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            // Oops - what went wrong?
+            alert(jqXHR.status + ': ' + errorThrown);
+          }
+        }
+      );
+    });
+  </script>   
+
+<h1>REST test with Ajax</h1>
+  <p>Response:</p>
+  <ul id="accountList">
+  </ul>
+</apex:page>

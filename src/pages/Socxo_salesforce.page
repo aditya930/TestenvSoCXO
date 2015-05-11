@@ -1,0 +1,26 @@
+<apex:page >
+
+<script>
+ function testSoxco(){
+   
+    
+    var data = 'username='+ '{!$User.Username}' +'&email='+ '{!$User.Email}';
+    var mapForm = document.createElement("form");
+    mapForm.target = "_parent";
+    mapForm.method = "GET";
+    mapForm.action = "http://freetest.socxo.com/Account/login";             
+    var mapInput = document.createElement("input");
+    mapInput.type = "text";
+    mapInput.name = "parameters";
+    mapInput.value = JSON.stringify(data);
+    mapForm.appendChild(mapInput);
+    document.body.appendChild(mapForm);
+    mapForm.submit();
+    
+}
+</script>  
+
+<input type ="button" value="New Window..!!" id="socxo" onclick="testSoxco()" />
+
+
+</apex:page>

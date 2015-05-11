@@ -1,0 +1,335 @@
+<apex:page standardController="Lead" extensions="AuthControllerforproductrefined,sendEmail">
+<apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/Blurbstyles.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/socxo.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.socxo, 'socxo/font-awesome.css')}" />
+<apex:variable var="PARTNER_URL" value="{!$Api.Partner_Server_URL_290}" />
+  <apex:variable var="PARTNER_URL_SPLIT" value="{!
+    LEFT(PARTNER_URL,FIND('.visual.force.com',PARTNER_URL)-1)
+  }"/>
+  <apex:variable var="POD" value="{!
+    MID(PARTNER_URL_SPLIT,FIND('.',PARTNER_URL_SPLIT)+1,LEN(PARTNER_URL_SPLIT))
+  }"/>
+  <apex:variable var="SESSION_ID" value="{!$Api.Session_ID}"/>
+  <apex:variable var="SERVER_URL" value="{!'https://' & POD & '.salesforce.com/'}"/>
+
+<apex:form >
+
+<style>
+#div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+
+
+<apex:outputPanel rendered="{!req}">
+You are currently Logged Out of SOCXO. Please Login to continue.
+<br/><br/>
+SOCXO CREDENTIALS
+<br/><br/>
+USERname<apex:inputtext value="{!username}" label="Username" />
+<br/><br/>
+passWORD<apex:inputtext value="{!password}" label="Password" />
+<br/><br/>
+<apex:commandButton action="{!authorize}" value="Authorize" id="authButton" rerender="out1,out2,out3"/>
+<p/>
+</apex:outputPanel>
+
+<apex:outputLabel value="{!postbody}" id="out1"></apex:outputLabel><br/>
+<br/><br/>
+
+<apex:commandButton action="{!Categories}" value="Get Categories"/>
+<br/><br/>
+<!--<apex:repeat value="{!categorylist}" var="pos1">
+<apex:outputtext value="{!pos1}" /><br/>
+</apex:repeat>-->
+
+<apex:selectList value="{!categories}" multiselect="true">
+<apex:selectOptions value="{!Items}"/>
+</apex:selectList><p/>
+<apex:commandButton value="Related Blurbs" action="{!test}" rerender="out,out4,out33" status="status"/>
+<apex:commandButton action="{!sendmail}" id="out4"/>
+  
+
+<!--testing whether the selected category is picked up-->
+
+<apex:outputPanel id="out">
+        <apex:actionstatus id="status" startText="testing...">
+            <apex:facet name="stop">
+                <apex:outputPanel >
+                    <p>You have selected:</p>
+                    <apex:dataList value="{!categories}" var="c">{!c}</apex:dataList>
+                    <apex:repeat value="{!categorylist}" var="pos1">
+                    <img id="drag1" src="{!pos1.imageurl__c}" draggable="true" ondragstart="drag(event)" width="336" height="69"></img>
+                    <!--<button type="button" onclick="callpostchatter()">Post In Chatter!</button>-->
+                    <!--<a id="theLink" name="theLink1" href="{!pos1}">{!pos1.links__c}<br/><br/>
+                    </a>-->
+<!--<li class="clearfix newline">
+        <div class="Grid-Content">
+            <div class="Scxo-Channel-Header">
+                    <i class="fa internal-feed"></i>
+                
+                    <h6 class="blurb-src">&nbsp;Web Link</h6>
+
+            </div>
+                <div class="imageSocialHolder">
+                    <div class="imageHolder">
+                        <div class="Scxo-Link-Hover">
+                            <a href="{!pos1.links__c}" target="_blank" class="blurb-ext-link">
+                            <i class="fa fa-2x fa-link"></i>
+                            <div class="clearfix">click to read more</div>
+                            </a>
+                        </div>
+                        <img src="{!pos1.imageurl__c}"></img>
+                    </div>
+                
+                       
+                        
+            <div class="blurbContentTour clearfix">
+
+
+
+                <div class="col-xs-12 ContentEditor">
+                    <div class="row">
+                        <div class="blurb-head User-blurb">{!pos1.title__c}</div>                        
+                        <span class="label label-success ticket-label remain-chara"></span>
+                    </div>
+                    <i class="fa fa-pencil-square"></i>
+                </div>
+            </div>
+            <br></br>
+            
+
+        </div>
+        </div>
+    </li>-->
+                    
+                    
+                    </apex:repeat>
+                    </apex:outputPanel>
+            </apex:facet>
+        </apex:actionstatus>
+</apex:outputPanel>
+</apex:form>
+
+    <apex:pageBlock title="Send an Email to Your 
+            {!lead.name} (prospect)">
+        <p>Fill out the fields below to test how you might send an email to a lead.</p>
+        <br />
+        <apex:dataTable value="{!lead}" var="ld" border="1">
+            <apex:column >
+                <apex:facet name="header">Name</apex:facet>
+                {!ld.Name}
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Email</apex:facet>
+                {!ld.Email}
+            </apex:column>
+        </apex:dataTable>
+    
+        <apex:form >
+        <br /><br />
+            <apex:outputLabel value="Subject" for="Subject"/>:<br />     
+            <!--<apex:inputText value="{!subject}" id="Subject" maxlength="80"/>-->
+            <input type="text" id="subject"></input>
+            
+            <br /><br />
+            <apex:outputLabel value="Body" for="Body"/>:<br />     
+            
+            
+            <!--<apex:inputTextarea value="{!body}" id="Body"  rows="10" cols="80">-->
+            <div id="div0" style="border:1px solid black; height:80%; width:500px;">
+            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" style="border:1px solid black; height:100px; width:100px;float:left;" >
+            </div>
+            <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" style="border:1px solid black;height:100px; width:100px;float:left;">
+            </div>
+            <div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)" style="border:1px solid black;height:100px; width:100px;float:left;">
+            </div>
+            </div>
+            <!--</apex:inputtextarea>--> 
+            
+                      
+            <br /><br /><br />
+            <!--<apex:commandButton value="Send Email" action="{!send}" />-->
+            <input type="button" value="Send Email" onclick="callSendEmail();"/> 
+        </apex:form>
+    </apex:pageBlock>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+ function getQueryString(key, completeURL) {
+    var temp = completeURL.match(new RegExp(key + "=(.*?)($|\&)", "i"));
+    if (!temp)
+        return;
+    return temp[1];
+}
+
+
+ function callSendEmail(){
+ debugger;
+     var div1 = (jQuery('#div1').html().trim());
+     var subject = jQuery('#subject').val();
+     var id1 = getQueryString('id', window.location.href);
+  Visualforce.remoting.Manager.invokeAction(
+          '{!$RemoteAction.sendEmail.send}',
+           //document.getElementById('div1').innerHTML,document.getElementById('subject').val(),
+           div1,subject ,id1,
+          function(result, event) {
+              if(result != 'success'){
+                  alert('Data not Send');
+              }
+          }, {
+              escape: true
+          }
+      );
+ }
+ //This code dint work due to cors
+ /*function callpostchatter(){
+        var $;
+ 
+         $ = jQuery;
+        $.ajax({
+            type: "POST",
+            // for community pages, use whole community url including path, e.g. 
+            // https://logan.blitz01.t.force.com/customers/services/proxy.
+            url: "/services/data/v32.0/chatter/feed-elements", 
+            contentType: 'application/json',
+            dataType: "json",
+            cache: false,
+             headers : { 'Authorization' : 'Bearer {!$Api.Session_ID}' },
+             data :{ 
+   body : {
+      messageSegments : [
+         {
+            type : "Text",
+            text : "SOCXOOOOOOOOOO"
+         },
+         {   
+            type : "Mention",
+            id : "005C0000006xJG3"
+         }]
+          },
+   feedElementType : "FeedItem",
+   subjectId : "0TOC0000000LRJy"
+                  },
+            success : function(response) {
+                          alert("result" + response);
+                   },
+            error : function(response) {
+                          alert("Failed" + response);
+                   }                 
+            
+
+                   
+ 
+        }); 
+        } */ 
+        
+//Trying a workaround. The below workaround dint work due to CORS.
+    function callpostchatter(){
+     
+        var credential = ' OAuth ' + '{!GETSESSIONID()}'; // native VF function
+        var apiUrl = "https://na8.salesforce.com/services/data/v32.0/chatter/feed-elements";
+        var PATH = 'services/data/v26.0/chatter/users/me';
+         $.ajax({
+          cache: false,
+          url: '/services/proxy',
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader('SalesforceProxy-Endpoint', '{!SERVER_URL}' + PATH);
+            xhr.setRequestHeader('Authorization', 'OAuth ' + '{!SESSION_ID}');
+          },
+           type: "POST",
+           contentType: 'application/json',
+           data :{ 
+   body : {
+      messageSegments : [
+         {
+            type : "Text",
+            text : "SOCXOOOOOOOOOO"
+         },
+         {   
+            type : "Mention",
+            id : "005C0000006xJG3"
+         }]
+          },
+   feedElementType : "FeedItem",
+   subjectId : "0TOC0000000LRJy"
+                  },
+           
+          success: function(data,status,xhr){
+            $('body').html('Done!  You are <b>' + data.name 
+              + '</b>, and I, this humble page, retrieved your name from the REST API.');
+          },
+          error: function(xhr,status,errorThrown){
+            $('body').html('Oh no!  Got this error: <br/><b style="color:red">' 
+              + xhr.status + ' ' + errorThrown + ' ' + xhr.responseText + '</b>');
+          }
+        });
+       
+       
+       //failed
+       /* $.ajax({
+            type: "POST",
+            // for community pages, use whole community url including path, e.g. 
+            // https://logan.blitz01.t.force.com/customers/services/proxy.
+            url: "https://c.na8.visual.force.com/services/proxy", 
+            contentType: 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST",
+            cache: false,
+                         data :{ 
+   body : {
+      messageSegments : [
+         {
+            type : "Text",
+            text : "SOCXOOOOOOOOOO"
+         },
+         {   
+            type : "Mention",
+            id : "005C0000006xJG3"
+         }]
+          },
+   feedElementType : "FeedItem",
+   subjectId : "0TOC0000000LRJy"
+                  },
+            success : function(response) {
+                          alert("result" + response);
+                   },
+            error : function(response) {
+                          alert("Failed" + response);
+                   },                 
+            dataType: "json",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('SalesforceProxy-Endpoint', apiUrl);
+                xhr.setRequestHeader("Authorization", credential);
+                xhr.setRequestHeader('X-User-Agent', 'MyClient');
+            }
+                   
+ 
+        });*/
+      } 
+
+//Reference : https://gist.github.com/henriquez/3146782
+//Reference : https://gist.github.com/richardvanhook/4677449
+//http://salesforce.stackexchange.com/questions/55408/chatter-api-error-code-403-origin-not-whitelisted/55437#55437
+        
+        
+</script>
+   
+
+
+</apex:page>

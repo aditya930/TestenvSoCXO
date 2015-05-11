@@ -1,0 +1,19 @@
+{
+    "username": "adityasocxo@suyati.com", 
+    "environment": "production", 
+    "project_name": "TestenvSoCXO", 
+    "workspace": "E:/Projects/Sublime", 
+    "org_url": "", 
+    "namespace": "", 
+    "id": "3BXI4F65M7O6LYDWH1D94RR3R6UCE4UL", 
+    "metadata_container": "1dc28000000577jAAA", 
+    "subscription": [
+        "ApexClass", 
+        "ApexComponent", 
+        "ApexPage", 
+        "ApexTrigger", 
+        "StaticResource", 
+        "CustomObject", 
+        "Profile"
+    ]
+}
